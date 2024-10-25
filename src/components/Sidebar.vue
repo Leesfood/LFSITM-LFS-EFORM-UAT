@@ -47,7 +47,7 @@ const inactiveClass = ref(
           <span class="mx-4 text-white">E-Form List</span>
         </router-link>
         <router-link class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'Tables' ? activeClass : inactiveClass]" to="/tables">
+          :class="[$route.name === 'Employees' ? activeClass : inactiveClass]" to="/employee">
           <svg class="w-5 h-5 text-white" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M7 3C6.44772 3 6 3.44772 6 4C6 4.55228 6.44772 5 7 5H13C13.5523 5 14 4.55228 14 4C14 3.44772 13.5523 3 13 3H7Z"

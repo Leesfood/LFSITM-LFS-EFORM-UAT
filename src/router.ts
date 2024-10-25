@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Dashboard from './views/Dashboard.vue'
 import Forms from './views/Forms.vue'
-import Tables from './views/Employee.vue'
 import UIElements from './views/UIElements.vue'
 import Login from './views/Login.vue'
 import Modal from './views/Modal.vue'
@@ -19,6 +18,10 @@ import SickLeave from './views/Leave/SickLeave.vue'
 import MaternityLeave from './views/Leave/MaternityLeave.vue'
 import SpecialLeave from './views/Leave/SpecialLeave.vue'
 import Profile from './views/Profile.vue'
+import AddEmployee from './views/Employees/Add.vue'
+import Employee from './views/Employee.vue'
+import View from './views/Employees/View.vue'
+import Edit from './views/Employees/Edit.vue'
 
 
 const routes: RouteRecordRaw[] = [
@@ -99,9 +102,24 @@ const routes: RouteRecordRaw[] = [
     component: Card,
   },
   {
-    path: '/tables',
-    name: 'Tables',
-    component: Tables,
+    path: '/employee',
+    name: 'employee',
+    component: Employee,
+  },
+  {
+    path: '/employee/add',
+    name: 'Add-Employee',
+    component: AddEmployee,
+  },
+  {
+    path: '/employee/:id/view',
+    name: 'view-Employee',
+    component: View,
+  },
+  {
+    path: '/employee/:id/edit',
+    name: 'edit-Employee',
+    component: Edit,
   },
   {
     path: '/ui-elements',

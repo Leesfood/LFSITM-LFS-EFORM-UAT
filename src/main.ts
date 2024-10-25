@@ -31,10 +31,10 @@ try {
 
   app.component('DefaultLayout', DashboardLayout);
   app.component('EmptyLayout', EmptyLayout);
-  
+
   app.use(naive);
   app.use(router);
-  
+
   app.mount('#app');
 } catch (error) {
   console.error("Error during app initialization:", error);

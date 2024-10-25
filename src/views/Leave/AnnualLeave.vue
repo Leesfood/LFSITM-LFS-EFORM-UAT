@@ -1,7 +1,7 @@
 <template>
 	<div class="rounded-md shadow dark:border bg-white dark:bg-gray-200 dark:border-gray-100  h-full">
 		<form @submit.prevent="submitForm">
-			<div >	
+			<div>
 				<p class="py-5 text-2xl battambang-regular text-center uppercase  text-black">
 					ពាក្យសុំច្បាប់ឈប់សម្រាកប្រចាំឆ្នាំ <br> Annual Leave Request form
 				</p>
@@ -10,80 +10,104 @@
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<!-- Employee ID -->
 					<div>
-						<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span class="battambang-regular text-[16px]"> លេខសម្គាល់បុគ្គលិក</span></label>
-						<n-input v-model:value="form.EmployeeID" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span
+								class="battambang-regular text-[16px]"> លេខសម្គាល់បុគ្គលិក</span></label>
+						<n-input v-model:value="form.EmployeeID" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Name -->
 					<div>
-						<label for="name" class="pt-2 text-[16px]">Employee Name / <span class="battambang-regular text-[16px]">ឈ្មោះបុគ្គលិក</span></label>
-						<n-input v-model:value="form.EmployeeName" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<label for="name" class="pt-2 text-[16px]">Employee Name / <span
+								class="battambang-regular text-[16px]">ឈ្មោះបុគ្គលិក</span></label>
+						<n-input v-model:value="form.EmployeeName" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Email -->
 					<div>
-						<label for="email" class="pt-2 text-[16px] ">Email / <span class="battambang-regular text-[16px]">អ៊ីមែល</span></label>
-						<n-input v-model:value="form.Email" type="text" placeholder="Enter your email" readonly class="mt-3 font-bold text-black" />
+						<label for="email" class="pt-2 text-[16px] ">Email / <span
+								class="battambang-regular text-[16px]">អ៊ីមែល</span></label>
+						<n-input v-model:value="form.Email" type="text" placeholder="Enter your email" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Department -->
 					<div>
-						<label for="department" class="pt-2 text-[16px]">Department / <span class="battambang-regular text-[16px]">នាយកដ្ឋាន</span></label>
-						<n-input v-model:value="form.Department" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<label for="department" class="pt-2 text-[16px]">Department / <span
+								class="battambang-regular text-[16px]">នាយកដ្ឋាន</span></label>
+						<n-input v-model:value="form.Department" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Position -->
 					<div>
-						<label for="position" class="pt-2 text-[16px]">Position / <span class="battambang-regular text-[16px]">តូនាទី</span></label>
-						<n-input v-model:value="form.Position" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<label for="position" class="pt-2 text-[16px]">Position / <span
+								class="battambang-regular text-[16px]">តូនាទី</span></label>
+						<n-input v-model:value="form.Position" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Site -->
 					<div>
-						<label for="site" class="pt-2 text-[16px]">Site / <span class="battambang-regular text-[16px]">ទីតាំង</span></label>
-						<n-input v-model:value="form.Site" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<label for="site" class="pt-2 text-[16px]">Site / <span
+								class="battambang-regular text-[16px]">ទីតាំង</span></label>
+						<n-input v-model:value="form.Site" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Approver -->
 					<div>
 						<label for="approver" class="pt-2 text-[16px]">Line Manager Email</label>
-						<n-input v-model:value="form.Approver" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<n-input v-model:value="form.Approver" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Phone -->
 					<div>
-						<label for="phone" class="pt-2 text-[16px] ">Phone / <span class="battambang-regular text-[16px]">លេខទូរស័ព្ទ</span></label>
+						<label for="phone" class="pt-2 text-[16px] ">Phone / <span
+								class="battambang-regular text-[16px]">លេខទូរស័ព្ទ</span></label>
 						<n-input v-model:value="form.Phone" type="text" class="mt-3  " />
 					</div>
 
 					<!-- Gender -->
 					<div>
-						<label for="gender" class=" pt-2 text-[16px]">Gender / <span class="battambang-regular text-[16px]">ភេទ</span></label>
-						<n-select v-model:value="form.Gender" :options="genderOptions" class="mt-3" />
+						<label for="gender" class=" pt-2 text-[16px]">Gender / <span
+								class="battambang-regular text-[16px]">ភេទ</span></label>
+						<!-- <n-select v-model:value="form.Gender" :options="genderOptions" class="mt-3" /> -->
+						<n-input v-model:value="form.Gender" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Leave Type -->
 					<div>
-						<label for="leave-type">Leave Type / <span class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
-						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<label for="leave-type">Leave Type / <span
+								class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
+						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Number of Days Requested -->
 					<div>
-						<label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span></label>
+						<label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span
+								class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span></label>
 						<n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" />
 					</div>
 
 					<!-- Reason for Leave -->
 					<div>
-						<label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span></label>
+						<label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span
+								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span></label>
 						<n-input v-model:value="form.ReasonForLeave" type="textarea" class="mt-3" />
 					</div>
 
 					<!-- attachment file or image -->
 					<div>
-						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref. documents</label>
-						<n-upload class="mt-3" v-model:value="form.Attachements" directory-dnd :max="1" @change="handleUploadChange" @finish="handleUploadFinish" @error="handleUploadError" :key="uploadKey" :show-file-list="true" :on-error="handleUploadError">
+						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref.
+							documents</label>
+						<n-upload class="mt-3" v-model:value="form.Attachements" directory-dnd :max="1"
+							@change="handleUploadChange" @finish="handleUploadFinish" @error="handleUploadError"
+							:key="uploadKey" :show-file-list="true" :on-error="handleUploadError">
 							<n-upload-dragger>
 								<div style="margin-bottom: 12px">
 									<n-icon size="18" :depth="3">
@@ -99,40 +123,50 @@
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 					<!-- Date and Time Fields -->
 					<div>
-						<label for="from-date" class="pt-2 text-[16px]">From Date / <span class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span></label>
-						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
+						<label for="from-date" class="pt-2 text-[16px]">From Date / <span
+								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span></label>
+						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3"
+							:is-date-disabled="dateDisabled" />
 					</div>
 					<div>
-						<label for="from-time" class="pt-2 text-[16px]">From Time / <span class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span></label>
+						<label for="from-time" class="pt-2 text-[16px]">From Time / <span
+								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span></label>
 						<n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
 					</div>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 					<div>
-						<label for="to-date" class="pt-2 text-[16px]">To Date / <span class="battambang-regular text-[16px]">រហូតដល់ថ្ងៃ</span></label>
-						<n-date-picker v-model:value="form.ToDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
+						<label for="to-date" class="pt-2 text-[16px]">To Date / <span
+								class="battambang-regular text-[16px]">រហូតដល់ថ្ងៃ</span></label>
+						<n-date-picker v-model:value="form.ToDate" type="date" class="mt-3"
+							:is-date-disabled="dateDisabled" />
 					</div>
 					<div>
-						<label for="to-time" class="pt-2 text-[16px]">To Time / <span class="battambang-regular text-[16px]">រហូតដល់ម៉ោង</span></label>
+						<label for="to-time" class="pt-2 text-[16px]">To Time / <span
+								class="battambang-regular text-[16px]">រហូតដល់ម៉ោង</span></label>
 						<n-time-picker v-model:value="form.ToTime" format="h:mm a" class="mt-3" />
 					</div>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 					<div>
-						<label for="back-date" class="pt-2 text-[16px]">Date back to work / <span class="battambang-regular text-[16px]">ថ្ងៃត្រឡប់មកធ្វើការវិញ</span></label>
-						<n-date-picker v-model:value="form.BackDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
+						<label for="back-date" class="pt-2 text-[16px]">Date back to work / <span
+								class="battambang-regular text-[16px]">ថ្ងៃត្រឡប់មកធ្វើការវិញ</span></label>
+						<n-date-picker v-model:value="form.BackDate" type="date" class="mt-3"
+							:is-date-disabled="dateDisabled" />
 					</div>
 					<div>
-						<label for="back-time" class="pt-2 text-[16px]">Time back to work / <span class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span></label>
+						<label for="back-time" class="pt-2 text-[16px]">Time back to work / <span
+								class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span></label>
 						<n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
 					</div>
 				</div>
 
 				<div class="grid grid-cols-1 gap-4 my-5">
 					<div class="pt-8 text-center">
-						<button type="submit" class="w-1/2 text-lg py-2 px-4 bg-gray-300 text-blue-600 hover:text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-[#a02022] dark:bg-[#a02022] dark:hover:bg-[#a02022]">
+						<button type="submit"
+							class="w-1/2 text-lg py-2 px-4 bg-gray-300 text-blue-600 hover:text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-[#a02022] dark:bg-[#a02022] dark:hover:bg-[#a02022]">
 							Submit
 						</button>
 					</div>
@@ -149,7 +183,7 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from "axios";
 import Swal from "sweetalert2";
-import { format, subDays } from "date-fns";  
+import { format, subDays } from "date-fns";
 import { useLoadingBar } from 'naive-ui';
 import { NSpin } from 'naive-ui';
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
@@ -195,21 +229,26 @@ onMounted(async () => {
 	const employeeData = JSON.parse(localStorage.getItem('employeeData'));
 
 	if (employeeData) {
-		form.value.EmployeeID = employeeData.employeeid;
-		form.value.EmployeeName = employeeData.employeename;
-		form.value.Email = employeeData.email;
-		form.value.Approver = employeeData.approveremail;
-		form.value.Department = employeeData.department;
-		form.value.Position = employeeData.section;
-		form.value.Site = employeeData.site;
-		form.value.allowdate = employeeData.allowdate; 
+		form.value.EmployeeID = employeeData.EmployeeID;
+		form.value.EmployeeName = employeeData.EmployeeName;
+		form.value.Email = employeeData.Email;
+		form.value.Approver = employeeData.ApproverEmail;
+		form.value.Department = employeeData.Department;
+		form.value.Position = employeeData.Section;
+		form.value.Site = employeeData.Site;
 		
+		// Check for empty or null values and provide default if necessary
+		form.value.Phone = employeeData.Phone || "N/A";  // Default to "N/A" if Phone is empty
+		form.value.Gender = employeeData.gender || "Not Specified";  // Default to "Not Specified" if Gender is empty
+		form.value.allowdate = employeeData.allowdate;
+
 		// Calculate the minimum selectable date based on allowdate
-		minSelectableDate.value = subDays(new Date(), parseInt(form.value.allowdate) + 1);  
+		minSelectableDate.value = subDays(new Date(), parseInt(form.value.allowdate) + 1);
 	} else {
 		Swal.fire("Error", "No employee data found. Please log in again.", "error");
 	}
 });
+
 const dateDisabled = (ts) => {
 	const date = new Date(ts);
 	return date < minSelectableDate.value;
@@ -334,7 +373,7 @@ const submitForm = async () => {
 			};
 
 			const response = await axios.post(`https://prod-18.southeastasia.logic.azure.com/workflows/70cdee3d71174907ab7e079877c5e8ec/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QBaD-PHa4UT8IOy5nHGi5gyvbORVZrNeNTtv0X5LZTc`, payload);
-			
+
 			if (response.data.status === 'Sucessfully') {
 				Swal.fire("Success", "ការស្នើរសុំរបស់អ្នកទទួលបានជោគជ័យ!", "success").then(() => {
 					router.push({ name: '/home' });
@@ -342,7 +381,7 @@ const submitForm = async () => {
 			} else {
 				Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
 			}
-			
+
 			employeeId.value = null;
 			uploadKey.value = Date.now();
 		} catch (error) {

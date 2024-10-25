@@ -51,7 +51,7 @@
             <router-link to="/profile">
               <p class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</p>
             </router-link>
-            <router-link to="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+            <router-link to="/"  @click="logoutUser" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
               Log out
             </router-link>
           </div>
@@ -66,4 +66,10 @@ import { useSidebar } from '../composables/useSidebar'
 
 const dropdownOpen = ref(false)
 const { isOpen } = useSidebar()
+function logoutUser() {
+  // Clear the employee data from local storage
+  localStorage.removeItem('employees');
+  console.log('Logged out, local storage cleared');
+}
+
 </script>

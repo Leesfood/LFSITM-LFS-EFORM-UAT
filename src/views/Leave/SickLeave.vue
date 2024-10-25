@@ -53,14 +53,18 @@
 
 					<!-- Phone -->
 					<div>
-						<label for="phone" class="pt-2 text-[16px] ">Phone / <span class="battambang-regular text-[16px]">លេខទូរស័ព្ទ</span></label>
+						<label for="phone" class="pt-2 text-[16px] ">Phone / <span
+								class="battambang-regular text-[16px]">លេខទូរស័ព្ទ</span></label>
 						<n-input v-model:value="form.Phone" type="text" class="mt-3  " />
 					</div>
 
 					<!-- Gender -->
 					<div>
-						<label for="gender" class=" pt-2 text-[16px]">Gender / <span class="battambang-regular text-[16px]">ភេទ</span></label>
-						<n-select v-model:value="form.Gender" :options="genderOptions" class="mt-3" />
+						<label for="gender" class=" pt-2 text-[16px]">Gender / <span
+								class="battambang-regular text-[16px]">ភេទ</span></label>
+						<!-- <n-select v-model:value="form.Gender" :options="genderOptions" class="mt-3" /> -->
+						<n-input v-model:value="form.Gender" type="text" placeholder="" readonly
+							class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Leave Type -->
@@ -196,21 +200,26 @@ onMounted(async () => {
 	const employeeData = JSON.parse(localStorage.getItem('employeeData'));
 
 	if (employeeData) {
-		form.value.EmployeeID = employeeData.employeeid;
-		form.value.EmployeeName = employeeData.employeename;
-		form.value.Email = employeeData.email;
-		form.value.Approver = employeeData.approveremail;
-		form.value.Department = employeeData.department;
-		form.value.Position = employeeData.section;
-		form.value.Site = employeeData.site;
-		form.value.allowdate = employeeData.allowdate; 
+		form.value.EmployeeID = employeeData.EmployeeID;
+		form.value.EmployeeName = employeeData.EmployeeName;
+		form.value.Email = employeeData.Email;
+		form.value.Approver = employeeData.ApproverEmail;
+		form.value.Department = employeeData.Department;
+		form.value.Position = employeeData.Section;
+		form.value.Site = employeeData.Site;
 		
+		// Check for empty or null values and provide default if necessary
+		form.value.Phone = employeeData.Phone || "N/A";  // Default to "N/A" if Phone is empty
+		form.value.Gender = employeeData.gender || "Not Specified";  // Default to "Not Specified" if Gender is empty
+		form.value.allowdate = employeeData.allowdate;
+
 		// Calculate the minimum selectable date based on allowdate
-		minSelectableDate.value = subDays(new Date(), parseInt(form.value.allowdate) + 1);  
+		minSelectableDate.value = subDays(new Date(), parseInt(form.value.allowdate) + 1);
 	} else {
 		Swal.fire("Error", "No employee data found. Please log in again.", "error");
 	}
 });
+
 const dateDisabled = (ts) => {
 	const date = new Date(ts);
 	return date < minSelectableDate.value;

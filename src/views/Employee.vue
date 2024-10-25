@@ -1,139 +1,298 @@
-<script setup lang="ts">
-import { useTableData } from '../composables/useTableData'
-
-const {simpleTableData,paginatedTableData, wideTableData,} = useTableData()
-</script>
-
 <template>
-  <div>
-    <div>
-
-      <div>
-        <h2 class="text-xl font-semibold leading-tight text-gray-700">
-          Users
-        </h2>
-
-        <div class="flex flex-col mt-3 sm:flex-row">
-          <div class="flex">
-            <div class="relative">
-              <select
-                class="block w-full h-full px-4 py-2 pr-8 leading-tight text-gray-700 bg-white border border-gray-400 rounded-l appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
-                <option>5</option>
-                <option>10</option>
-                <option>20</option>
-              </select>
-
-              <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-
-            <div class="relative">
-              <select
-                class="block w-full h-full px-4 py-2 pr-8 leading-tight text-gray-700 bg-white border-t border-b border-r border-gray-400 rounded-r appearance-none sm:rounded-r-none sm:border-r-0 focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                <option>All</option>
-                <option>Active</option>
-                <option>Inactive</option>
-              </select>
-
-              <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
+  <div class="flex items-center justify-center">
+    <div class="w-full">
+      <div class="md:px-1 py-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
+        <div class="sm:flex items-center justify-end">
+          <div>
+            <button @click="getAllEmployees"
+              class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+              <p class="text-sm font-medium leading-none text-white">Get All Employees</p>
+            </button>
           </div>
-
-          <div class="relative block mt-2 sm:mt-0">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-              <svg viewBox="0 0 24 24" class="w-4 h-4 text-gray-500 fill-current">
-                <path
-                  d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z" />
-              </svg>
-            </span>
-
-            <input placeholder="Search"
-              class="block w-full py-2 pl-8 pr-6 text-sm text-gray-700 placeholder-gray-400 bg-white border border-b border-gray-400 rounded-l rounded-r appearance-none sm:rounded-l-none focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none">
-          </div>
-        </div>
-
-        <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
-          <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
-            <table class="min-w-full leading-normal">
-              <thead>
-                <tr>
-                  <th
-                    class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                    User
-                  </th>
-                  <th
-                    class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                    Role
-                  </th>
-                  <th
-                    class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                    Created at
-                  </th>
-                  <th
-                    class="px-5 py-3 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase bg-gray-100 border-b-2 border-gray-200">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(u, index) in paginatedTableData" :key="index">
-                  <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0 w-10 h-10">
-                        <img class="w-full h-full rounded-full" :src="u.picture" alt="profile pic">
-                      </div>
-
-                      <div class="ml-3">
-                        <p class="text-gray-900 whitespace-nowrap">
-                          {{ u.name }}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-nowrap">
-                      {{ u.role }}
-                    </p>
-                  </td>
-                  <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-nowrap">
-                      {{ u.created }}
-                    </p>
-                  </td>
-                  <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                    <span
-                      :class="`relative inline-block px-3 py-1 font-semibold text-${u.statusColor}-900 leading-tight`">
-                      <span aria-hidden :class="`absolute inset-0 bg-${u.statusColor}-200 opacity-50 rounded-full`" />
-                      <span class="relative">{{ u.status }}</span>
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="flex flex-col items-end px-5 py-5 bg-white border-t xs:flex-row xs:justify-between">
-              <span class="text-xs text-gray-900 xs:text-sm"></span>
-
-              <div class="inline-flex mt-2 xs:mt-0">
-                <button class="px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-300 rounded-l hover:bg-gray-400">
-                  Prev
-                </button>
-                <button class="px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-300 rounded-r hover:bg-gray-400">
-                  Next
-                </button>
-              </div>
-            </div>
+          <div>
+            <router-link to="/employee/add">
+              <button
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                <p class="text-sm font-medium leading-none text-white">Add Employee</p>
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
+
+      <!-- Responsive table -->
+      <div class="bg-white shadow px-4 pb-5 overflow-x-auto">
+        <table class="w-full table-auto border border-gray-200">
+          <thead>
+            <tr class="w-full text-sm leading-none text-gray-800 border-b border-gray-200 whitespace-nowrap">
+              <th class="font-normal py-2 text-center border-r border-gray-200">No</th>
+              <th class="font-normal py-4 px-4 text-left border-r border-gray-200 hidden md:table-cell">Employee ID</th>
+              <th class="font-normal py-4 text-left px-4 border-r border-gray-200">Employee Name</th>
+              <th class="font-normal py-4 text-left px-4 border-r border-gray-200">Gender</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Department</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Section</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Site</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 1</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 2</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 3</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden 2xl:table-cell">Email Acknowledge
+              </th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Email</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Phone Number</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Allow Date</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Status</th>
+              <th class="font-normal border-r border-gray-200">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(employee, index) in paginatedEmployees" :key="index"
+              class="text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-gray-200">
+              <td class="px-4 py-4 flex items-center text-left border-r border-gray-200">{{ (currentPage - 1) * pageSize
+                + index + 1 }}</td>
+              <td class="px-4 border-r text-left border-gray-200 whitespace-nowrap hidden md:table-cell">{{
+                employee.employeeid }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.employeename }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.gender }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{
+                employee.department }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{ employee.section
+                }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden xl:table-cell">{{ employee.site }}
+              </td>
+              <td
+                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
+                {{ employee.emailapproverl1 }}</td>
+              <td
+                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
+                {{ employee.emailapproverl2 }}</td>
+              <td
+                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
+                {{ employee.emailapproverl3 }}</td>
+              <td
+                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden 2xl:table-cell">
+                {{ employee.acknowledgeby }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
+                <span v-if="employee.email === '0'" class="text-red-600">No email</span>
+                <span v-else class="text-blue-600">{{ employee.email }}</span>
+              </td>
+              <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{
+                formatPhone(employee.phone) }}</td>
+              <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{ employee.allowdate }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
+                <span v-if="employee.status === 'inactive'" class="text-red-600">Inactive</span>
+                <span v-else class="text-green-600">{{ employee.status }}</span>
+              </td>
+              <td class="border-r px-4 text-center relative whitespace-nowrap">
+                <button @click="toggleDropdown(index)" class="focus:ring-2 rounded-md focus:outline-none" role="button"
+                  aria-label="options">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                  </svg>
+                </button>
+                <div v-if="show === index" class="dropdown-content bg-white shadow w-24 absolute z-20 right-0 top-8">
+                  <div
+                    class="focus:outline-none text-md focus:text-indigo-600 w-full hover:bg-indigo-700 py-3 px-4 cursor-pointer hover:text-white"
+                    @click="viewEmployee(employee)">
+                    <p>View</p>
+                  </div>
+                  <div
+                    class="focus:outline-none text-md focus:text-indigo-600 w-full hover:bg-indigo-700 py-3 px-4 cursor-pointer hover:text-white"
+                    @click="editEmployee(employee)">
+                    <p>Edit</p>
+                  </div>
+                
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination controls -->
+      <div class="flex items-center justify-between mt-6">
+        <button @click="prevPage" :disabled="currentPage === 1"
+          class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+          </svg>
+          <span>Previous</span>
+        </button>
+
+        <div class="items-center hidden md:flex gap-x-3">
+          <span v-for="page in visiblePages" :key="page" @click="goToPage(page)"
+            :class="{ 'bg-blue-100/60 text-blue-500': page === currentPage, 'hover:bg-gray-100 text-gray-500': page !== currentPage }"
+            class="px-2 py-1 text-sm rounded-md cursor-pointer">{{ page }}</span>
+        </div>
+
+        <button @click="nextPage" :disabled="currentPage === totalPages"
+          class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+          <span>Next</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+          </svg>
+        </button>
+      </div>
     </div>
-
-
   </div>
 </template>
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router'; // Import useRouter
+import axios from 'axios';
+
+const employees = ref([]);
+const currentPage = ref(1);
+const pageSize = 10;
+const show = ref(null);
+
+// Initialize router
+const router = useRouter();
+
+// Method to format phone number
+function formatPhone(phone) {
+  if (phone.startsWith('+855')) {
+    // Replace +855 with 0 for local phone numbers
+    return '0' + phone.slice(4);
+  }
+  return phone;
+}
+
+// Toggle dropdown for each row
+function toggleDropdown(index) {
+  console.log('Toggling dropdown for index:', index);
+  show.value = show.value === index ? null : index;
+}
+
+// Edit employee function
+function editEmployee(employee) {
+  console.log('Editing employee:', employee);
+  router.push({ name: 'edit-Employee', params: { id: employee.employeeid } });
+}
+
+// View employee function
+function viewEmployee(employee) {
+  console.log('Viewing employee:', employee);
+  router.push({ name: 'view-Employee', params: { id: employee.employeeid } });
+}
+
+// Delete employee function
+function deleteEmployee(employee) {
+  console.log('Deleting employee:', employee);
+  alert(`Deleting employee: ${employee.employeename}`);
+}
+
+// Fetch all employees from the API
+async function getAllEmployees() {
+  try {
+    const response = await axios.post(
+      'https://prod-18.southeastasia.logic.azure.com:443/workflows/c353c70b1bfd47c0b60d11abce5387ad/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=yrYf_rYcWBkxcq9O_2ZEkNKCAA-BC0q-QVoUFwf2Xl8',
+      {
+        RequestType: 'GetEmployeeslist',
+        Employeestatus: 'active',
+      }
+    );
+
+    if (response.data && response.data.data) {
+      const fixedString = response.data.data
+        .replace(/''\+/g, "'+")
+        .replace(/'/g, '"');
+      
+      const employeeData = JSON.parse(fixedString);
+      const employeesList = employeeData.EmployeesList || [];
+      employees.value = employeesList;
+
+      // Store data in local storage
+      localStorage.setItem('employees', JSON.stringify(employeesList));
+      console.log('Stored employees data in local storage:', employeesList);
+    } else {
+      console.error('Error: response.data.data is undefined');
+    }
+  } catch (error) {
+    console.error('Error fetching employee data:', error);
+  }
+}
+
+// Load employees from local storage on page load
+onMounted(() => {
+  const storedEmployees = localStorage.getItem('employees');
+  if (storedEmployees) {
+    employees.value = JSON.parse(storedEmployees);
+    console.log('Loaded employees from local storage:', employees.value);
+  }
+});
+
+// Computed property to get paginated employees
+const paginatedEmployees = computed(() => {
+  const start = (currentPage.value - 1) * pageSize;
+  const end = start + pageSize;
+  return employees.value.slice(start, end);
+});
+
+// Total number of pages
+const totalPages = computed(() => {
+  return Math.ceil(employees.value.length / pageSize);
+});
+
+// Computed property for visible pages with gaps
+const visiblePages = computed(() => {
+  const total = totalPages.value;
+  const current = currentPage.value;
+  const maxVisiblePages = 5;
+  const range = [];
+
+  if (total <= maxVisiblePages) {
+    for (let i = 1; i <= total; i++) {
+      range.push(i);
+    }
+  } else {
+    range.push(1, 2, 3);
+
+    if (current > 3 && current < total - 2) {
+      if (current - 1 > 3) range.push('...');
+      range.push(current - 1, current, current + 1);
+      if (current + 1 < total - 2) range.push('...');
+    }
+
+    range.push(total - 2, total - 1, total);
+  }
+
+  return range;
+});
+
+// Pagination functions
+function nextPage() {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+}
+
+function prevPage() {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+}
+
+function goToPage(page) {
+  if (page !== '...') currentPage.value = page;
+}
+
+</script>
+
+<style scoped>
+.dropdown-content {
+  transition: all 0.3s ease;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+</style>

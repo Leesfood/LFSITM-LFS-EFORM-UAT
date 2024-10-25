@@ -1,0 +1,23 @@
+
+{
+    "data": [
+        {
+            "userId": "744ad19b-f0dc-40e7-9fc6-bec46dc524e1",
+            "userName": "Sophanna Vouth",
+            "email": "Sophannnavouth@gmail.com",
+            "allowReset": false,
+            "active": true,
+            "created_At": "2024-10-20T06:45:45.5910721",
+            "created_by": "guidexample"
+        },
+        {
+            "userId": "8d183cfb-10da-49d3-8809-ffb4544aadd1",
+            "userName": "Huy Sanlong",
+            "email": "user@example.com",
+            "allowReset": false,
+            "active": true,
+            "created_At": "2024-08-18T18:01:08.5685191",
+            "created_by": "string"
+        }
+    ]
+}
