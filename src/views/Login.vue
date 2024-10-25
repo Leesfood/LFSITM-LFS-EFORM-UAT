@@ -51,7 +51,7 @@ const submitForm = async () => {
     const employeeData = response.data;
 
     localStorage.setItem('employeeData', JSON.stringify(employeeData));
-
+    localStorage.setItem('userRole', employeeData.role); // Store the role
     // Get the data from localStorage
     const storedData = localStorage.getItem('employeeData');
 

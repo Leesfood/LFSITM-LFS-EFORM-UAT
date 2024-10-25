@@ -35,106 +35,127 @@ const routes: RouteRecordRaw[] = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: '/annual-leave',
     name: 'annual-leave',
     component: AnnualLeave,
+    meta: { roles: ['1', '2'] }
   },
   {
     path: '/profile',
     name: 'profile',
     component: Profile,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/early",
     name: "/early",
-    component:  EarlyForm,
+    component: EarlyForm,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/late-request",
     name: "/late-request",
     component: LateForm,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/mission-request",
     name: "/mission-request",
     component: MissionForm,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/missedScan-request",
     name: "/missedScan-request",
     component: MissedScan,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/companyActivity-request",
     name: "/companyActivity-request",
     component: CompanyActivity,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/annual-request",
     name: "/annual-request",
     component: AnnualLeave,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/sick-request",
     name: "/sick-request",
     component: SickLeave,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/maternity-request",
     name: "/maternity-request",
     component: MaternityLeave,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: "/Special-request",
     name: "/Special-request",
-    component:SpecialLeave,
+    component: SpecialLeave,
+    meta: { roles: ['1', '2','0'] }
   },
   {
     path: '/forms',
     name: 'Forms',
     component: Forms,
+    meta: { roles: [ '2'] }
   },
   {
     path: '/cards',
     name: 'Cards',
     component: Card,
+    meta: { roles: [ '2'] }
   },
   {
     path: '/employee',
     name: 'employee',
     component: Employee,
+    meta: { roles: ['1', '2'] }
   },
   {
     path: '/employee/add',
     name: 'Add-Employee',
     component: AddEmployee,
+    meta: { roles: ['1', '2'] }
   },
   {
     path: '/employee/:id/view',
     name: 'view-Employee',
     component: View,
+    meta: { roles: ['1', '2'] }
   },
   {
     path: '/employee/:id/edit',
     name: 'edit-Employee',
     component: Edit,
+    meta: { roles: ['1', '2'] }
   },
   {
     path: '/ui-elements',
     name: 'UIElements',
     component: UIElements,
+    meta: { roles: [ '2'] }
   },
   {
     path: '/modal',
     name: 'Modal',
     component: Modal,
+    meta: { roles: [ '2'] }
   },
   {
     path: '/blank',
     name: 'Blank',
     component: Blank,
+    meta: { roles: [ '2'] }
   },
 ]
 
@@ -142,5 +163,20 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+declare module 'vue-router' {
+  interface RouteMeta {
+    roles?: string[]; // Define roles as an array of strings in RouteMeta
+  }
+}
+
+router.beforeEach((to, from, next) => {
+  const userRole = localStorage.getItem('userRole') || '0';
+
+  if (to.meta.roles && !to.meta.roles.includes(userRole)) {
+    next({ name: 'Dashboard' });
+  } else {
+    next();
+  }
+});
 
 export default router
