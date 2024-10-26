@@ -34,17 +34,16 @@
               <th class="font-normal py-4 px-4 text-left border-r border-gray-200 hidden md:table-cell">Employee ID</th>
               <th class="font-normal py-4 text-left px-4 border-r border-gray-200">Employee Name</th>
               <th class="font-normal py-4 text-left px-4 border-r border-gray-200">Gender</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Phone Number</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Email</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Department</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Section</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Site</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 1</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 2</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 3</th>
-              <th class="font-normal text-left px-4 border-r border-gray-200 hidden 2xl:table-cell">Email Acknowledge
-              </th>
-              <th class="font-normal text-left px-4 border-r border-gray-200">Email</th>
-              <th class="font-normal text-left px-4 border-r border-gray-200">Phone Number</th>
-              <th class="font-normal text-left px-4 border-r border-gray-200">Allow Date</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden 2xl:table-cell">Email Acknowledge</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200">Back Date</th>
               <th class="font-normal text-left px-4 border-r border-gray-200">Status</th>
               <th class="font-normal border-r border-gray-200">Action</th>
             </tr>
@@ -58,6 +57,12 @@
                 employee.employeeid }}</td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.employeename }}</td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.gender }}</td>
+              <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{
+                formatPhone(employee.phone) }}</td>
+              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
+              <span v-if="employee.email === '0'" class="text-red-600">No email</span>
+              <span v-else class="text-blue-600">{{ employee.email }}</span>
+              </td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{
                 employee.department }}</td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{ employee.section
@@ -76,19 +81,14 @@
               <td
                 class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden 2xl:table-cell">
                 {{ employee.acknowledgeby }}</td>
-              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
-                <span v-if="employee.email === '0'" class="text-red-600">No email</span>
-                <span v-else class="text-blue-600">{{ employee.email }}</span>
-              </td>
-              <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{
-                formatPhone(employee.phone) }}</td>
+ 
               <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{ employee.allowdate }}</td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
                 <span v-if="employee.status === 'inactive'" class="text-red-600">Inactive</span>
                 <span v-else class="text-green-600">{{ employee.status }}</span>
               </td>
               <td class="border-r px-4 text-center relative whitespace-nowrap">
-                <button @click="toggleDropdown(index)" class="focus:ring-2 rounded-md focus:outline-none" role="button"
+                <button @click="toggleDropdown(index)" class="f'top-auto bottom-8' : 'top-8' ocus:ring-2 rounded-md focus:outline-none" role="button"
                   aria-label="options">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -148,7 +148,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router'; // Import useRouter
-import { useLoadingBar } from 'naive-ui';// Loaing bar
+import { emptyProps, useLoadingBar } from 'naive-ui';// Loaing bar
 import axios from 'axios';
 
 const employees = ref([]);
@@ -242,7 +242,9 @@ function searchEmployees() {
   filteredEmployees.value = employees.value.filter(employee => {
     return (
       employee.employeename.toLowerCase().includes(query) ||
-      employee.employeeid.toString().includes(query) // You can add more fields to search
+      employee.employeeid.toString().includes(query) || 
+      employee.phone.toString().includes(query)||
+      employee.email.toString().includes(query) // You can add more fields to search
     );
   });
 }

@@ -11,7 +11,7 @@
       <div class="flex items-center justify-center mt-8">
         <div class="flex items-center">
           
-          <span class="mx-2 text-2xl font-semibold text-white">E-Form Request</span>
+          <span class="mx-2 text-2xl font-semibold text-white">LFS-HRMS</span>
 
         </div>
       </div>
@@ -25,7 +25,7 @@
             <path d="M12 2.25195C14.8113 2.97552 17.0245 5.18877 17.748 8.00004H12V2.25195Z" fill="currentColor" />
           </svg>
 
-          <span class="mx-4">E-Form List</span>
+          <span class="mx-4">HR EForm Listing</span>
         </router-link>
         <router-link v-if="allowedRoutes.myrequest" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'MyRequest' ? activeClass : inactiveClass]" to="/myrequest">
