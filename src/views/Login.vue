@@ -61,11 +61,13 @@ const submitForm = async () => {
     } else {
       console.log("No employee data found in localStorage");
     }
-
-    Swal.fire("ជោគជ័យ", `សូមស្វាគមន៍, ${employeeData.EmployeeName}`, "success").then(() => {
+     if(employeeData.EmployeeID==null || employeeData.EmployeeID==""){
+      Swal.fire(`មិនត្រឹមត្រូវ`, `លេខសម្គាល់ដែលបញ្ជូល: ${form.value.EmployeeID}`, "error");
+     }else{
+      Swal.fire("ជោគជ័យ", `សូមស្វាគមន៍, ${employeeData.EmployeeName}`, "success").then(() => {
       router.push('/dashboard');
     });
-
+     }    
     form.value.EmployeeID = ""; // Reset the form
   } catch (error) {
     Swal.fire(`មិនត្រឹមត្រូវ`, `លេខសម្គាល់ដែលបញ្ជូល: ${form.value.EmployeeID}`, "error");

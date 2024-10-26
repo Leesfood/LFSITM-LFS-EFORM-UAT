@@ -27,7 +27,16 @@
 
           <span class="mx-4">E-Form List</span>
         </router-link>
+        <router-link v-if="allowedRoutes.myrequest" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'MyRequest' ? activeClass : inactiveClass]" to="/myrequest">
+          <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 10C2 5.58172 5.58172 2 10 2V10H18C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10Z"
+              fill="currentColor" />
+            <path d="M12 2.25195C14.8113 2.97552 17.0245 5.18877 17.748 8.00004H12V2.25195Z" fill="currentColor" />
+          </svg>
 
+          <span class="mx-4">My Requests</span>
+        </router-link>
         <router-link v-if="allowedRoutes.employee" class="flex items-center text-white px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'employee' ? activeClass : inactiveClass]" to="/employee">
           <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +110,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useSidebar } from '../composables/useSidebar'
-import { useRouter, useRoute } from 'vue-router'
+
 
 
 const { isOpen } = useSidebar()
@@ -118,6 +127,7 @@ const allowedRoutes = computed(() => {
   return {
     dashboard: true, // accessible to everyone
     employee: ['1', '2'].includes(userRole), // only visible for roles 1 and 2
+    myrequest: ['0','1','2'].includes(userRole),
     uiElements: userRole === '2',
     forms: userRole === '2',
     cards: userRole === '2',

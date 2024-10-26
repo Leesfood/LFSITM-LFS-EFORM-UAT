@@ -1,22 +1,27 @@
 <template>
   <div class="flex items-center justify-center">
     <div class="w-full">
-      <div class="md:px-1 py-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
-        <div class="sm:flex items-center justify-end">
+      <div class="md:px-1 py-4 pl-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
+        <div class="sm:flex items-center justify-start">
           <div>
             <button @click="getAllEmployees"
-              class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-              <p class="text-sm font-medium leading-none text-white">Get All Employees</p>
-            </button>
+  class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+  <p class="text-sm font-medium leading-none text-white text-center">Get All Employees</p>
+</button>
           </div>
           <div>
             <router-link to="/employee/add">
               <button
-                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 pl-4 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
                 <p class="text-sm font-medium leading-none text-white">Add Employee</p>
               </button>
             </router-link>
           </div>
+          <div class="mt-4 sm:mt-0 sm:ml-3">
+            <input v-model="searchQuery" @input="searchEmployees" type="text" placeholder="Search employees"
+              class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
+          
         </div>
       </div>
 
@@ -45,7 +50,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(employee, index) in paginatedEmployees" :key="index"
+            <tr v-for="(employee, index) in paginatedEmployees" :key="employee.employeeid"
               class="text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-gray-200">
               <td class="px-4 py-4 flex items-center text-left border-r border-gray-200">{{ (currentPage - 1) * pageSize
                 + index + 1 }}</td>
@@ -143,16 +148,19 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router'; // Import useRouter
+import { useLoadingBar } from 'naive-ui';// Loaing bar
 import axios from 'axios';
 
 const employees = ref([]);
+const filteredEmployees = ref([]);
 const currentPage = ref(1);
 const pageSize = 10;
+const searchQuery = ref('');
 const show = ref(null);
 
 // Initialize router
 const router = useRouter();
-
+filteredEmployees.value = employees.value;
 // Method to format phone number
 function formatPhone(phone) {
   if (phone.startsWith('+855')) {
@@ -185,9 +193,10 @@ function deleteEmployee(employee) {
   console.log('Deleting employee:', employee);
   alert(`Deleting employee: ${employee.employeename}`);
 }
-
+const loadingBar = useLoadingBar();
 // Fetch all employees from the API
 async function getAllEmployees() {
+  loadingBar.start();
   try {
     const response = await axios.post(
       'https://prod-18.southeastasia.logic.azure.com:443/workflows/c353c70b1bfd47c0b60d11abce5387ad/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=yrYf_rYcWBkxcq9O_2ZEkNKCAA-BC0q-QVoUFwf2Xl8',
@@ -205,7 +214,7 @@ async function getAllEmployees() {
       const employeeData = JSON.parse(fixedString);
       const employeesList = employeeData.EmployeesList || [];
       employees.value = employeesList;
-
+      filteredEmployees.value = employeesList; 
       // Store data in local storage
       localStorage.setItem('employees', JSON.stringify(employeesList));
       console.log('Stored employees data in local storage:', employeesList);
@@ -214,6 +223,8 @@ async function getAllEmployees() {
     }
   } catch (error) {
     console.error('Error fetching employee data:', error);
+  }finally {
+    loadingBar.finish();
   }
 }
 
@@ -222,20 +233,30 @@ onMounted(() => {
   const storedEmployees = localStorage.getItem('employees');
   if (storedEmployees) {
     employees.value = JSON.parse(storedEmployees);
-    console.log('Loaded employees from local storage:', employees.value);
+    filteredEmployees.value = employees.value; // Initialize filtered employees
   }
 });
+// New search function
+function searchEmployees() {
+  const query = searchQuery.value.toLowerCase();
+  filteredEmployees.value = employees.value.filter(employee => {
+    return (
+      employee.employeename.toLowerCase().includes(query) ||
+      employee.employeeid.toString().includes(query) // You can add more fields to search
+    );
+  });
+}
 
 // Computed property to get paginated employees
 const paginatedEmployees = computed(() => {
   const start = (currentPage.value - 1) * pageSize;
   const end = start + pageSize;
-  return employees.value.slice(start, end);
+  return filteredEmployees.value.slice(start, end);
 });
 
 // Total number of pages
 const totalPages = computed(() => {
-  return Math.ceil(employees.value.length / pageSize);
+  return Math.ceil(filteredEmployees.value.length / pageSize);
 });
 
 // Computed property for visible pages with gaps
@@ -295,4 +316,5 @@ function goToPage(page) {
 .overflow-x-auto {
   overflow-x: auto;
 }
+
 </style>

@@ -10,8 +10,15 @@
 
                     <!-- FullName -->
                     <h1 class="w-full text-center sm:text-left mt-4 sm:mt-0 sm:ml-4 text-gray-800 dark:text-white lg:text-4xl md:text-3xl sm:text-2xl xs:text-xl font-serif">
-                        {{ employeeData?.EmployeeName || 'Not available' }}
+                         {{ employeeData?.EmployeeName || 'Not available' }}
                     </h1>
+                    <div class="flex justify-Start">    
+                      
+                            <button class="flex px-4 py-2 bg-red-600 text-white text-lg font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <i class="fa-solid fa-pen text-md"></i>
+                            </button>
+                        
+                    </div>
                 </div>
 
                 <div
@@ -70,6 +77,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+
 
 interface EmployeeData {
     EmployeeID: string;

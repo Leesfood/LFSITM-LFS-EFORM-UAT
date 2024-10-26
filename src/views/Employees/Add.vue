@@ -3,7 +3,7 @@
     <form @submit.prevent="submitForm">
       <div>
         <p class="py-5 text-2xl battambang-regular text-center uppercase text-black">
-          Add New Employee
+          Create New Employee
         </p>
       </div>
       <div class="p-4 md:p-6 lg:p-10">
@@ -121,7 +121,7 @@
           <div class="pt-8 text-center">
             <button type="submit"
               class="w-1/2 text-lg py-2 px-4 bg-gray-300 text-blue-600 hover:text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-[#a02022] dark:bg-[#a02022] dark:hover:bg-[#a02022]">
-              Add New Record
+              Add New
             </button>
           </div>
         </div>

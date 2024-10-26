@@ -22,6 +22,7 @@ import AddEmployee from './views/Employees/Add.vue'
 import Employee from './views/Employee.vue'
 import View from './views/Employees/View.vue'
 import Edit from './views/Employees/Edit.vue'
+import MyRequest from './views/MyRequest/MyRequest.vue'
 
 
 const routes: RouteRecordRaw[] = [
@@ -36,6 +37,12 @@ const routes: RouteRecordRaw[] = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { roles: ['1', '2','0'] }
+  },
+  {
+    path: '/myrequest',
+    name: 'MyRequest',
+    component:MyRequest,
+    meta: { roles: ['0','1','2'] }
   },
   {
     path: '/annual-leave',
