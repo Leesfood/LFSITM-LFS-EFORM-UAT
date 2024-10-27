@@ -3,6 +3,10 @@
     <div class="w-full">
       <div class="md:px-1 py-4 pl-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
         <div class="sm:flex items-center justify-start">
+          <div class="mt-4 sm:mt-0 sm:ml-3">
+            <input v-model="searchQuery" @input="searchEmployees" type="text" placeholder="Search employees"
+              class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
           <div>
             <button @click="getAllEmployees"
   class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
@@ -17,12 +21,15 @@
               </button>
             </router-link>
           </div>
-          <div class="mt-4 sm:mt-0 sm:ml-3">
-            <input v-model="searchQuery" @input="searchEmployees" type="text" placeholder="Search employees"
-              class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
-          </div>
           
-        </div>
+          
+          <div>
+            <button @click="refreshEmployeesDATA"
+  class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+  <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
+          </button>
+         </div>
+        </div> 
       </div>
 
       <!-- Responsive table -->
@@ -149,6 +156,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router'; // Import useRouter
 import { emptyProps, useLoadingBar } from 'naive-ui';// Loaing bar
+//import { useLoadingBar, createDiscreteApi } from 'naive-ui';
 import axios from 'axios';
 
 const employees = ref([]);
@@ -221,6 +229,27 @@ async function getAllEmployees() {
     } else {
       console.error('Error: response.data.data is undefined');
     }
+  } catch (error) {
+    console.error('Error fetching employee data:', error);
+  }finally {
+    loadingBar.finish();
+  }
+}
+
+// Refresh Data manually 
+async function refreshEmployeesDATA() {
+  loadingBar.start();
+  try {
+    const response = await axios.post(
+      'https://prod-39.southeastasia.logic.azure.com:443/workflows/9473b96cc52a49298a9aa8ccb4a36bbf/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ENBAPIxil2S-MCG5Z82eA2mbBtE_o9rK-x_7QPDK7Is'
+    );
+    if (response.data.status === "200") {
+            Swal.fire("Success", "ការផ្លាស់ប្តូរបានជោគជ័យ!", "success").then(() => {
+                router.push({ name: 'employee' });
+            });
+        } else {
+            Swal.fire("Error", "ការផ្លាស់ប្តូររបស់អ្នកបរាជ័យ", "error");
+        }
   } catch (error) {
     console.error('Error fetching employee data:', error);
   }finally {
