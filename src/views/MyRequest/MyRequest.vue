@@ -3,7 +3,7 @@
     
     <div class="w-full">
       <div class="md:px-1 py-4 pl-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
-        <h3 class="text-red-700 text-3xl font-medium">under constraction!!!!</h3>
+        <h3 class="text-red-700 text-3xl font-medium">under construction!!!!</h3>
       </div>
       <!-- Responsive table -->
       <div class="bg-white shadow px-4 pb-5 overflow-x-auto">
