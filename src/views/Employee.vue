@@ -25,8 +25,8 @@
           
           <div>
             <button @click="refreshEmployeesDATA"
-  class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-  <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
+              class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+            <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
           </button>
          </div>
         </div> 

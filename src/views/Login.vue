@@ -32,7 +32,7 @@
         </div>
 
         <div class="px-5 py-6 text-gray-700 bg-gray-100 border-b">
-          <label class="text-xs"><span class="text-sm text-gray-700">លេខសម្គាល់បុគ្គលិក / <span>Employee ID</span></span></label>
+          <label class="text-xs"><span class="text-sm text-gray-700">លេខសម្គាល់បុគ្គលិក / <span>Your Employee ID</span></span></label>
 
           <div class="relative mt-2 rounded-md shadow-sm">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
@@ -42,7 +42,7 @@
 </svg>
             </span>
 
-            <input v-model="form.EmployeeID" type="text" placeholder="លេខកូដបុគ្គលិក/ID"
+            <input v-model="form.EmployeeID" type="text" placeholder="លេខកូដបុគ្គលិក/Your ID"
                    class="w-full px-12 py-2 border-transparent rounded-md appearance-none focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500">
           </div>
         </div>
