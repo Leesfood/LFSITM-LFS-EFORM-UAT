@@ -178,6 +178,7 @@ const form = ref({
 	Position: "",
 	Attachements: [],
 	telegramchatid: "",
+	EmailAcknowledge: "",
 	telegramchatidApprover: "",
 	allowdate: "1", // Default allow date, assuming it's fetched later
 });
@@ -203,7 +204,7 @@ onMounted(async () => {
 		form.value.Department = employeeData.Department;
 		form.value.Position = employeeData.Section;
 		form.value.Site = employeeData.Site;
-		
+		form.value.EmailAcknowledge = employeeData.aknowledgeby;
 		// Check for empty or null values and provide default if necessary
 		form.value.Phone = employeeData.Phone || "N/A";  // Default to "N/A" if Phone is empty
 		form.value.Gender = employeeData.gender || "Not Specified";  // Default to "Not Specified" if Gender is empty

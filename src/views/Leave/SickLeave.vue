@@ -182,20 +182,15 @@ const form = ref({
 	Position: "",
 	Attachements: [],
 	telegramchatid: "",
+	EmailAcknowledge: "",
 	telegramchatidApprover: "",
-	allowdate: "1", // Default allow date, assuming it's fetched later
+	allowdate: "1", 
 });
 
 const employeeId = ref(null);
 const uploadKey = ref(Date.now());
 const router = useRouter();
-const genderOptions = ref([
-	{ label: 'ប្រុស', value: 'Male' },
-	{ label: 'ស្រី', value: 'Female' },
-]);
-
 const minSelectableDate = ref(null);
-
 onMounted(async () => {
 	const employeeData = JSON.parse(localStorage.getItem('employeeData'));
 
@@ -207,6 +202,7 @@ onMounted(async () => {
 		form.value.Department = employeeData.Department;
 		form.value.Position = employeeData.Section;
 		form.value.Site = employeeData.Site;
+		form.value.EmailAcknowledge = employeeData.aknowledgeby;
 		
 		// Check for empty or null values and provide default if necessary
 		form.value.Phone = employeeData.Phone || "N/A";  // Default to "N/A" if Phone is empty
