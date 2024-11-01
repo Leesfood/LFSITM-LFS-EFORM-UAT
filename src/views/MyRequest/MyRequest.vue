@@ -168,12 +168,12 @@ async function getMyrequest() {
       const fixedString = response.data.data
         .replace(/'/g, '"')
         .replace(/\s+/g, ''); // Remove extra whitespace if needed
-      console.log("Fixed String before JSON parse:", fixedString);  // Debugging line
+      //console.log("Fixed String before JSON parse:", fixedString);  // Debugging line
       try {
         const parsedData = JSON.parse(fixedString);
         myrequest.value = parsedData.MyRequestList || [];
         
-        console.log('Parsed myrequest data:', myrequest.value);
+       // console.log('Parsed myrequest data:', myrequest.value);
         localStorage.setItem('myrequest', JSON.stringify(myrequest.value));
       } catch (parseError) {
         console.error("JSON Parsing Error:", parseError);
@@ -245,7 +245,7 @@ function prevPage() {
   }
 }
 
-function goToPage(page) {
+function goToPage(page:any) {
   if (page !== '...') currentPage.value = page;
 }
 
