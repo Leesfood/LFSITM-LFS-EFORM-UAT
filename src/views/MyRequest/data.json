@@ -1,0 +1,34 @@
+{
+    "MyRequestList": [
+        {
+            "RequestType": "ពាក្យសុំច្បាប់ឈប់សម្រាកប្រចាំឆ្នាំ",
+            "FromDate": "2024-09-17 09:14 AM",
+            "ToDate": "2024-09-17 09:14 AM",
+            "LeaveReason": "testing no email",
+            "LineManagerEmail": "sokhy.khim@leesfood.com",
+            "ApproverL1": "Khim Sokhy",
+            "HRAcknowledg": "",
+            "Status": "Pending-HR Acknowledg"
+        },
+        {
+            "RequestType": "ពាក្យសុំច្បាប់ឈប់សម្រាកប្រចាំឆ្នាំ",
+            "FromDate": "2024-09-17 09:18 AM",
+            "ToDate": "2024-09-17 09:18 AM",
+            "LeaveReason": "Testing User no email",
+            "LineManagerEmail": "sokhy.khim@leesfood.com",
+            "ApproverL1": "Khim Sokhy",
+            "HRAcknowledg": "Khim Sokhy",
+            "Status": "Pending-HR Acknowledg"
+        },
+        {
+            "RequestType": "ពាក្យសុំច្បាប់ឈប់សម្រាកប្រចាំឆ្នាំ",
+            "FromDate": "2024-10-05 02:00 AM",
+            "ToDate": "2024-10-05 02:00 AM",
+            "LeaveReason": "testing 5 day back ",
+            "LineManagerEmail": "sokhy.khim@leesfood.com;sokhy.khim@leesfood.com",
+            "ApproverL1": "Khim Sokhy",
+            "HRAcknowledg": "",
+            "Status": "Line Manager-Rejected"
+        }
+    ]
+}
