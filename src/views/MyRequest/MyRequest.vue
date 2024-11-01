@@ -52,7 +52,7 @@
                 <td colspan="7" class="text-center text-gray-500 py-4">No requests found.</td>
             </tr>
             <!-- Loop through myrequest data -->
-            <tr v-for="(requestlist, index) in myrequest" :key="index" class="text-sm leading-none text-gray-800 border-b border-gray-200 whitespace-nowrap">
+            <tr v-for="(requestlist, index) in paginatedMyrequestlist" :key="index" class="text-sm leading-none text-gray-800 border-b border-gray-200 whitespace-nowrap">
                 <td class="text-center border-r border-gray-200 py-2">{{ index + 1 }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200 hidden md:table-cell">{{ requestlist.RequestType }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.FromDate }}</td>
@@ -72,13 +72,38 @@
         </tbody>
     </table>
       </div>
+      <!-- Pagination controls -->
+      <div class="flex items-center justify-between mt-6">
+        <button @click="prevPage" :disabled="currentPage === 1"
+          class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+          </svg>
+          <span>Previous</span>
+        </button>
 
+        <div class="items-center hidden md:flex gap-x-3">
+          <span v-for="page in visiblePages" :key="page" @click="goToPage(page)"
+            :class="{ 'bg-blue-100/60 text-blue-500': page === currentPage, 'hover:bg-gray-100 text-gray-500': page !== currentPage }"
+            class="px-2 py-1 text-sm rounded-md cursor-pointer">{{ page }}</span>
+        </div>
+
+        <button @click="nextPage" :disabled="currentPage === totalPages"
+          class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+          <span>Next</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref,computed, onMounted } from 'vue';
 import { format, subDays } from "date-fns";
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -122,6 +147,8 @@ onMounted(() => {
 });
 // Define myrequest with the RequestData type
 const myrequest = ref<RequestData[]>([]); 
+const currentPage = ref(1);
+const pageSize = 10;
 const loading = ref(false);
 const loadingBar = useLoadingBar();
 
@@ -167,7 +194,60 @@ function handleAction(request: RequestData, action: string) {
   const actionMessage = action === 'view' ? 'viewing' : 'cancelling';
   Swal.fire('Action', `You are ${actionMessage} the request: ${request.RequestType}`, 'info');
 }
+// Computed property to get paginated employees
+const paginatedMyrequestlist = computed(() => {
+  const start = (currentPage.value - 1) * pageSize;
+  const end = start + pageSize;
+  return myrequest.value.slice(start, end);
+});
 
+// Total number of pages
+const totalPages = computed(() => {
+  return Math.ceil(myrequest.value.length / pageSize);
+});
+
+// Computed property for visible pages with gaps
+const visiblePages = computed(() => {
+  const total = totalPages.value;
+  const current = currentPage.value;
+  const maxVisiblePages = 5;
+  const range = [];
+
+  if (total <= maxVisiblePages) {
+    for (let i = 1; i <= total; i++) {
+      range.push(i);
+    }
+  } else {
+    range.push(1, 2, 3);
+
+    if (current > 3 && current < total - 2) {
+      if (current - 1 > 3) range.push('...');
+      range.push(current - 1, current, current + 1);
+      if (current + 1 < total - 2) range.push('...');
+    }
+
+    range.push(total - 2, total - 1, total);
+  }
+
+  return range;
+});
+
+// Pagination functions
+function nextPage() {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+}
+
+function prevPage() {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+}
+
+function goToPage(page) {
+  if (page !== '...') currentPage.value = page;
+}
 
     
  </script>
@@ -177,6 +257,17 @@ function handleAction(request: RequestData, action: string) {
   font-family: "Battambang", system-ui;
   font-weight: 400;
   font-style: normal;
+}
+.dropdown-content {
+  transition: all 0.3s ease;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
         ::-webkit-scrollbar {
             width: 12px;
