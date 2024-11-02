@@ -26,8 +26,8 @@
           <div class="sm:flex items-center justify-start">
               <button @click="getMyrequest"
                       class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-center justify-center px-6 py-2 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded transition duration-200">
-                  <i class="fas fa-tasks mr-2"></i> <!-- Tasks icon -->
-                  <p class="text-sm font-medium leading-none text-white">Get My Requests</p>
+                  <i class="fas fa-refresh mr-2 text-white"></i> <!-- Tasks icon -->
+                  <p class="text-sm font-medium leading-none text-white">Refresh</p>
               </button>
           </div>
       </div>
@@ -42,7 +42,7 @@
                 <th class="font-normal py-4 text-left px-4 border-r border-gray-300">From Date</th>
                 <th class="font-normal py-4 text-left px-4 border-r border-gray-300">To Date</th>
                 <th class="font-normal text-left px-4 border-r border-gray-300">Reason for leave</th>
-                <th class="font-normal text-left px-4 border-r border-gray-300">Status</th>
+                <th class="font-normal text-left px-4 border-r border-gray-300">Request Status</th>
                 <th class="font-normal border-r border-gray-200">Action</th>
             </tr>
         </thead>
@@ -52,13 +52,13 @@
                 <td colspan="7" class="text-center text-gray-500 py-4">No requests found.</td>
             </tr>
             <!-- Loop through myrequest data -->
-            <tr v-for="(requestlist, index) in paginatedMyrequestlist" :key="index" class="text-sm leading-none text-gray-800 border-b border-gray-200 whitespace-nowrap">
+            <tr v-for="(requestlist, index) in paginatedMyrequestlist" :key="index" :class="['text-sm leading-none border-b border-gray-200 whitespace-nowrap']">
                 <td class="text-center border-r border-gray-200 py-2">{{ index + 1 }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200 hidden md:table-cell">{{ requestlist.RequestType }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.FromDate }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.ToDate }}</td>
-                <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.LeaveReason }}</td>
-                <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.Status }}</td>
+                <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.LeaveReason}}</td>
+                <td :class="getRowClass(requestlist.Status)" class="px-4 py-4 text-center border-r border-gray-200">{{getRowchangeStatus(requestlist.Status) }}</td>
                 <td class="text-center border-r border-gray-200">
                     <!-- Enhanced Action Buttons with Icons -->
                     <div class="flex justify-center">
@@ -166,8 +166,8 @@ async function getMyrequest() {
     if (response.data && response.data.data) {
       // Replace single quotes with double quotes and parse
       const fixedString = response.data.data
-        .replace(/'/g, '"')
-        .replace(/\s+/g, ''); // Remove extra whitespace if needed
+        .replace(/'/g, '"');
+        //.replace(/\s+/g, ''); // Remove extra whitespace if needed
       //console.log("Fixed String before JSON parse:", fixedString);  // Debugging line
       try {
         const parsedData = JSON.parse(fixedString);
@@ -198,7 +198,19 @@ function handleAction(request: RequestData, action: string) {
 const paginatedMyrequestlist = computed(() => {
   const start = (currentPage.value - 1) * pageSize;
   const end = start + pageSize;
-  return myrequest.value.slice(start, end);
+  return sortedMyrequestList.value.slice(start, end);
+});
+
+const sortedMyrequestList = computed(() => {
+    return myrequest.value.slice().sort((a, b) => {
+        if (a.Status.includes('Pending') && !b.Status.includes('Pending')) {
+            return -1; // Place 'Pending' statuses first
+        } else if (a.Status.includes('Rejected') && !b.Status.includes('Rejected')) {
+            return 0; // Place non-'Pending' statuses after 'Pending'
+        } else {
+            return 1; // Keep other statuses in the same order
+        }
+    });
 });
 
 // Total number of pages
@@ -248,11 +260,46 @@ function prevPage() {
 function goToPage(page:any) {
   if (page !== '...') currentPage.value = page;
 }
+function getRowClass(requeststatus:string) {
+  if (requeststatus.includes('Approved')) {
+      return 'text-green';
+    } else if (requeststatus.includes('Rejected')) {
+      return 'text-red';
+    } else if (requeststatus.includes('Pending')) {
+      return 'text-orange';
+    } else {
+      return 'text-orange';
+    }
+  }
+  function getRowchangeStatus(requeststatus:string) {
+    if (requeststatus.includes('Approved')) {
+        return 'Completed';
+    } else if (requeststatus.includes('Rejected')) {
+        return 'Rejected';
+    } else if (requeststatus.includes('Pending')) {
+        return 'Pending';
+    } else {
+        return 'Pending';
+    }
+}
 
     
  </script>
 
 <style>
+.text-green {
+  color: green;
+  
+}
+.text-red {
+  color: red;
+}
+.text-orange {
+  color: orange;
+}
+.text-default {
+  color: #555;
+}
 .battambang-regular {
   font-family: "Battambang", system-ui;
   font-weight: 400;

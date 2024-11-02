@@ -3,16 +3,13 @@
     <div class="w-full">
       <div class="md:px-1 py-4 pl-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
         <div class="sm:flex items-center justify-start">
-          <div class="mt-4 sm:mt-0 sm:ml-3">
-            <input v-model="searchQuery" @input="searchEmployees" type="text" placeholder="Search employees"
-              class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
-          </div>
+         
           <div>
             <button @click="getAllEmployees"
-  class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-  <p class="text-sm font-medium leading-none text-white text-center">Get All Employees</p>
-</button>
-          </div>
+              class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+              <p class="text-sm font-medium leading-none text-white text-center">Get All Employees</p>
+            </button>
+           </div>
           <div>
             <router-link to="/employee/add">
               <button
@@ -21,14 +18,16 @@
               </button>
             </router-link>
           </div>
-          
-          
           <div>
             <button @click="refreshEmployeesDATA"
               class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
             <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
           </button>
          </div>
+         <div class="mt-4 sm:mt-0 sm:ml-3">
+            <input v-model="searchQuery" @input="searchEmployees" type="text" placeholder="Search employees"
+              class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
         </div> 
       </div>
 
