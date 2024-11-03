@@ -11,8 +11,7 @@
       <div class="flex items-center justify-center mt-8">
         <div class="flex items-center">
           
-          <span class="mx-2 text-2xl font-semibold text-white">E-FORM</span>
-
+          <span class="mx-2 text-center text-2xl font-semibold text-white">MyHR</span>
         </div>
       </div>
 
@@ -40,6 +39,11 @@
           :class="[$route.name === 'MyRequest' ? activeClass : inactiveClass]" to="/myrequest">
           <i class="fas fa-paper-plane w-5 h-5"></i>
           <span class="mx-4">My Requests</span>
+        </router-link>
+        <router-link v-if="allowedRoutes.myassets" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'MyAssets' ? activeClass : inactiveClass]" to="/myassets">
+          <i class="fas fa-briefcase w-5 h-5"></i>
+          <span class="mx-4">My Assets</span>
         </router-link>
         <router-link v-if="allowedRoutes.employee" class="flex items-center text-white px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'employee' ? activeClass : inactiveClass]" to="/employee">
@@ -114,6 +118,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useSidebar } from '../composables/useSidebar'
+import MyAssets from '../views/MyAssets/MyAssets.vue';
 
 
 
@@ -127,16 +132,22 @@ const inactiveClass = ref(
 
 
 const userRole = localStorage.getItem('userRole') || '0';
+//'0' users
+//1' HR role
+//'2' admin
 const allowedRoutes = computed(() => {
   return {
     dashboard: true, // accessible to everyone
     employee: ['1', '2'].includes(userRole), // only visible for roles 1 and 2
     myrequest: ['0','1','2'].includes(userRole),
+    myassets:['2'].includes(userRole),
     uiElements: userRole === '2',
     forms: userRole === '2',
     cards: userRole === '2',
     modal: userRole === '2',
     blank: userRole === '2',
+
+
   };
 });
 </script>

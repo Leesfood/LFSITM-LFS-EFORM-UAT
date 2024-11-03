@@ -1,19 +1,25 @@
 <template>
   <div class="flex items-center justify-center">
     <div class="w-full">
+
       <div class="md:px-1 py-4 pl-4 md:py-7 bg-white rounded-tl-lg rounded-tr-lg">
         <div class="sm:flex items-center justify-start">
-         
+
           <div>
             <button @click="getAllEmployees"
               class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
               <p class="text-sm font-medium leading-none text-white text-center">Get All Employees</p>
             </button>
-           </div>
+          </div>
           <div>
             <router-link to="/employee/add">
               <button
                 class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 pl-4 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-5 h-5 text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 <p class="text-sm font-medium leading-none text-white">Add Employee</p>
               </button>
             </router-link>
@@ -21,14 +27,14 @@
           <div>
             <button @click="refreshEmployeesDATA"
               class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-            <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
-          </button>
-         </div>
-         <div class="mt-4 sm:mt-0 sm:ml-3">
+              <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
+            </button>
+          </div>
+          <div class="mt-4 sm:mt-0 sm:ml-3">
             <input v-model="searchQuery" @input="searchEmployees" type="text" placeholder="Search employees"
               class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
           </div>
-        </div> 
+        </div>
       </div>
 
       <!-- Responsive table -->
@@ -45,9 +51,7 @@
               <!-- <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Section</th> -->
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Site</th>
               <th class="font-normal text-left px-4 border-r border-gray-200">Email</th>
-              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 1</th>
-              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 2</th>
-              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Email Approver 3</th>
+              <th class="font-normal text-left px-4 border-r border-gray-200 hidden xl:table-cell">Status</th>
               <th class="font-normal border-r border-gray-200">Action</th>
             </tr>
           </thead>
@@ -62,7 +66,7 @@
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.gender }}</td>
               <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{
                 formatPhone(employee.phone) }}</td>
-     
+
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{
                 employee.department }}</td>
               <!-- <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{ employee.section
@@ -70,52 +74,37 @@
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden xl:table-cell">{{ employee.site }}
               </td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
-              <span v-if="employee.email === '0'" class="text-red-600">No email</span>
-              <span v-else class="text-blue-600">{{ employee.email }}</span>
+                <span v-if="employee.email === '0'" class="text-red-600">No email</span>
+                <span v-else class="text-blue-600">{{ employee.email }}</span>
               </td>
               <td
                 class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
-                {{ employee.emailapproverl1 }}</td>
-              <td
-                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
-                {{ employee.emailapproverl2 }}</td>
-              <td
-                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
-                {{ employee.emailapproverl3 }}</td>
-<!--  
+                {{ employee.status }}</td>
+              <!--  
               <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{ employee.allowdate }}</td>
               <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
                 <span v-if="employee.status === 'inactive'" class="text-red-600">Inactive</span>
                 <span v-else class="text-green-600">{{ employee.status }}</span>
               </td> -->
-              <td class="border-r px-4 text-center relative whitespace-nowrap">
-                <button @click="toggleDropdown(index)" class="f'top-auto bottom-8' : 'top-8' ocus:ring-2 rounded-md focus:outline-none" role="button"
-                  aria-label="options">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                  </svg>
-                </button>
-                <div v-if="show === index" class="dropdown-content bg-white shadow w-24 absolute z-20 right-0 top-8">
-                  <div
-                    class="focus:outline-none text-md focus:text-indigo-600 w-full hover:bg-indigo-700 py-3 px-4 cursor-pointer hover:text-white"
-                    @click="viewEmployee(employee)">
-                    <p>View</p>
+              <td class="px-4 py-4 text-sm whitespace-nowrap">
+                <div class="flex items-center gap-x-6">
+                  <button  @click="editEmployee(employee)"
+                    class="text-blue-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                       </svg>
+                  </button>
+                  <div class="flex justify-center">
+                    <button @click="viewEmployee(employee)" class="flex items-center bg-blue-500 text-white font-semibold py-1 px-2 rounded hover:bg-blue-600 transition duration-200">
+                      <i class="fas fa-eye mr-1"></i> View 
+                    </button>
                   </div>
-                  <div
-                    class="focus:outline-none text-md focus:text-indigo-600 w-full hover:bg-indigo-700 py-3 px-4 cursor-pointer hover:text-white"
-                    @click="editEmployee(employee)">
-                    <p>Edit</p>
-                  </div>
-                
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-
       <!-- Pagination controls -->
       <div class="flex items-center justify-between mt-6">
         <button @click="prevPage" :disabled="currentPage === 1"
@@ -142,6 +131,7 @@
           </svg>
         </button>
       </div>
+
     </div>
   </div>
 </template>
@@ -150,7 +140,6 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router'; // Import useRouter
 import { emptyProps, useLoadingBar } from 'naive-ui';// Loaing bar
-//import { useLoadingBar, createDiscreteApi } from 'naive-ui';
 import axios from 'axios';
 
 const employees = ref([]);
@@ -198,6 +187,7 @@ function deleteEmployee(employee) {
 const loadingBar = useLoadingBar();
 // Fetch all employees from the API
 async function getAllEmployees() {
+   // Show the modal when loading starts
   loadingBar.start();
   try {
     const response = await axios.post(
@@ -212,11 +202,11 @@ async function getAllEmployees() {
       const fixedString = response.data.data
         .replace(/''\+/g, "'+")
         .replace(/'/g, '"');
-      
+
       const employeeData = JSON.parse(fixedString);
       const employeesList = employeeData.EmployeesList || [];
       employees.value = employeesList;
-      filteredEmployees.value = employeesList; 
+      filteredEmployees.value = employeesList;
       // Store data in local storage
       localStorage.setItem('employees', JSON.stringify(employeesList));
       console.log('Stored employees data in local storage:', employeesList);
@@ -225,7 +215,7 @@ async function getAllEmployees() {
     }
   } catch (error) {
     console.error('Error fetching employee data:', error);
-  }finally {
+  } finally {
     loadingBar.finish();
   }
 }
@@ -238,15 +228,15 @@ async function refreshEmployeesDATA() {
       'https://prod-39.southeastasia.logic.azure.com:443/workflows/9473b96cc52a49298a9aa8ccb4a36bbf/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ENBAPIxil2S-MCG5Z82eA2mbBtE_o9rK-x_7QPDK7Is'
     );
     if (response.data.status === "200") {
-            Swal.fire("Success", "ការផ្លាស់ប្តូរបានជោគជ័យ!", "success").then(() => {
-                router.push({ name: 'employee' });
-            });
-        } else {
-            Swal.fire("Error", "ការផ្លាស់ប្តូររបស់អ្នកបរាជ័យ", "error");
-        }
+      Swal.fire("Success", "ការផ្លាស់ប្តូរបានជោគជ័យ!", "success").then(() => {
+        router.push({ name: 'employee' });
+      });
+    } else {
+      Swal.fire("Error", "ការផ្លាស់ប្តូររបស់អ្នកបរាជ័យ", "error");
+    }
   } catch (error) {
     console.error('Error fetching employee data:', error);
-  }finally {
+  } finally {
     loadingBar.finish();
   }
 }
@@ -265,8 +255,8 @@ function searchEmployees() {
   filteredEmployees.value = employees.value.filter(employee => {
     return (
       employee.employeename.toLowerCase().includes(query) ||
-      employee.employeeid.toString().includes(query) || 
-      employee.phone.toString().includes(query)||
+      employee.employeeid.toString().includes(query) ||
+      employee.phone.toString().includes(query) ||
       employee.email.toString().includes(query) // You can add more fields to search
     );
   });
@@ -341,5 +331,4 @@ function goToPage(page) {
 .overflow-x-auto {
   overflow-x: auto;
 }
-
 </style>

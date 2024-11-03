@@ -42,8 +42,7 @@
                 <th class="font-normal py-4 text-left px-4 border-r border-gray-300">From Date</th>
                 <th class="font-normal py-4 text-left px-4 border-r border-gray-300">To Date</th>
                 <th class="font-normal text-left px-4 border-r border-gray-300">Reason for leave</th>
-                <th class="font-normal text-left px-4 border-r border-gray-300">Request Status</th>
-                <th class="font-normal border-r border-gray-200">Action</th>
+                <th class="font-normal text-left px-4 border-r border-gray-300">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -58,16 +57,18 @@
                 <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.FromDate }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.ToDate }}</td>
                 <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.LeaveReason}}</td>
-                <td :class="getRowClass(requestlist.Status)" class="px-4 py-4 text-center border-r border-gray-200">{{getRowchangeStatus(requestlist.Status) }}</td>
-                <td class="text-center border-r border-gray-200">
-                    <!-- Enhanced Action Buttons with Icons -->
-                    <div class="flex justify-center">
-                        <button @click="handleAction(requestlist, 'view')" class="flex items-center bg-blue-500 text-white font-semibold py-1 px-2 rounded hover:bg-blue-600 transition duration-200">
-                            <i class="fas fa-eye mr-1"></i> <!-- Eye icon for View -->
-                            View
-                        </button>
-                    </div>
-                </td>
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                <div class="flex items-center gap-x-6">
+                <div class="flex justify-center">
+                  <button @click="handleAction(requestlist, 'view')" 
+                    :class="['flex items-center  text-white font-semibold py-1 px-2 rounded hover:bg-green-600 transition duration-200',
+                        requestlist.Status.includes('Approved') ? 'bg-blue-600' :
+                        requestlist.Status.includes('Pending') ? 'bg-yellow-700' : 'bg-red-600']">
+                    <i class="fas fa-eye mr-1"></i>{{getRowchangeStatus(requestlist.Status)}}
+                    </button>
+                  </div>
+                </div>
+              </td>
             </tr>
         </tbody>
     </table>
@@ -111,10 +112,22 @@ import { useLoadingBar } from 'naive-ui';
 
 // Define interface for the request items
 interface RequestData {
-  RequestType: string;
-  FromDate: string;
-  ToDate: string;
-  LeaveReason: string;
+  RequestType:string;
+  FromDate:string;
+  ToDate:string;
+  NumberOfdaysRequested:string;
+  DatebackTowork:string;
+  Requestdate:string;
+  LeaveReason:string;
+  LineManagerEmail:string;
+  LineManagerName:string;
+  LineManagerComment:string;
+  LineManagerApproveDate:string;
+  LineManagerRespone:string;
+  AcknowledgedBy:string;
+  AcknowledgedByComment:string;
+  AcknowledgedByDate:string;
+  HRRespone:string;
   Status:string;
 }
 interface EmployeeProfileData {
@@ -151,7 +164,6 @@ const currentPage = ref(1);
 const pageSize = 10;
 const loading = ref(false);
 const loadingBar = useLoadingBar();
-
 
 async function getMyrequest() {
   loadingBar.start();
@@ -191,8 +203,30 @@ async function getMyrequest() {
 }
 
 function handleAction(request: RequestData, action: string) {
-  const actionMessage = action === 'view' ? 'viewing' : 'cancelling';
-  Swal.fire('Action', `You are ${actionMessage} the request: ${request.RequestType}`, 'info');
+  const requstdetail = `
+		<div style="text-align: left;">
+    <p class="p-custom"><span class="custom-width">ថ្ងៃស្នើសុំ/Date request:</span><span class="custom-span">${request.Requestdate}</span></p>
+    <p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ/Reason for Leave:</span><br><span class="custom-span">${request.LeaveReason}</span></p>
+		<p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)/Number of request:</span><span class="custom-span">${request.NumberOfdaysRequested}</span></p>
+		<p class="p-custom"><span class="custom-width">ចាប់ពីថ្ងៃ/From date:</span><span class="custom-span">${request.FromDate}</span></p>
+		<p class="p-custom"><span class="custom-width">រហូតដល់ថ្ងៃ/To Date:</span><span class="custom-span">${request.ToDate}</span></p>
+		<p class="p-custom"><span class="custom-width">ថ្ងៃមកធ្វើការវិញ/Back date:</span><span class="custom-span">${request.DatebackTowork}</span></p>
+   <p class="p-custom"><span class="custom-width">Status :</span><span class=${getRowClassSetColor(request.Status)}>${request.Status}</span></p> 
+    <p class="p-custom"><span class="custom-width"><==Line Manager==></span><span class="custom-span"></span><span class=${getRowClassSetColor(request.LineManagerRespone)}>${request.LineManagerRespone}</span></p>
+    <p class="p-custom"><span class="custom-width">Name :</span><span class="text-green">${request.LineManagerName}</span>&nbsp;Date : <span class="text-green">${request.LineManagerApproveDate}</span></p>  
+    <p class="p-custom"><span class="custom-width">Comment :</span><span class="text-green">${request.LineManagerComment}</span></p>  
+    <p class="p-custom"><span class="custom-width"><==HR Acknowledg==></span><span class="custom-span"></span><span class=${getRowClassSetColor(request.HRRespone)}>${request.HRRespone}</span></p> 
+    <p class="p-custom"><span class="custom-width">Name :</span><span class="custom-span">${request.AcknowledgedBy}</span> Date :<span class="text-green">${request.AcknowledgedByDate}</span></p> 
+    <p class="p-custom"><span class="custom-width">Comment :</span><span class="text-green">${request.AcknowledgedByComment}</span></p>  
+		</div>`;
+
+  if (action === 'view') {
+    // Handle view action logic here
+    Swal.fire(request.RequestType, requstdetail);
+  } else if (action === 'cancel') {
+    // Handle cancel action logic here
+    Swal.fire('Cancel Request', `You are canceling the request: ${request.RequestType}`);
+  }
 }
 // Computed property to get paginated employees
 const paginatedMyrequestlist = computed(() => {
@@ -260,13 +294,13 @@ function prevPage() {
 function goToPage(page:any) {
   if (page !== '...') currentPage.value = page;
 }
-function getRowClass(requeststatus:string) {
+function getRowClassSetColor(requeststatus:string) {
   if (requeststatus.includes('Approved')) {
       return 'text-green';
     } else if (requeststatus.includes('Rejected')) {
       return 'text-red';
     } else if (requeststatus.includes('Pending')) {
-      return 'text-orange';
+      return 'text-orange-700';
     } else {
       return 'text-orange';
     }

@@ -23,8 +23,11 @@ import Employee from './views/Employee.vue'
 import View from './views/Employees/View.vue'
 import Edit from './views/Employees/Edit.vue'
 import MyRequest from './views/MyRequest/MyRequest.vue'
+import MyAssets from './views/MyAssets/MyAssets.vue'
 
-
+//1' HR role
+//'2' admin
+//'0' users
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -42,6 +45,12 @@ const routes: RouteRecordRaw[] = [
     path: '/myrequest',
     name: 'MyRequest',
     component:MyRequest,
+    meta: { roles: ['0','1','2'] }
+  },
+  {
+    path: '/myassets',
+    name: 'MyAssets',
+    component:MyAssets,
     meta: { roles: ['0','1','2'] }
   },
   {
