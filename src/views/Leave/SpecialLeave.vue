@@ -1,5 +1,5 @@
 <template>
-	<div class=" bg-white h-full pb-5">
+	<div class="bg-white h-full pb-5">
 		<form @submit.prevent="submitForm">
 			<div class="w-full">
 				<p class="py-5 text-2xl battambang-regular text-center uppercase  text-black">
@@ -7,7 +7,15 @@
                 </p>
 			</div>
 			<div class="md:p-6 lg:p-10 bg-white rounded-xl shadow dark:border dark:bg-gray-800 dark:border-gray-700">
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+					<!-- Collapsible Employee Information Section -->
+				<div  @click="toggleSection" class="cursor-pointer font-bold text-lg text-blue-600 bg-gray-200 mb-4 flex justify-start items-center p-2 rounded-lg">
+				<span>Employee information detail</span>
+				<span class="ml-2">
+				<span v-if="showSection"><i class="fas fa-chevron-down"></i></span>
+				<span v-else><i class="fas fa-chevron-right"></i></span>
+			 	</span>
+				</div>
+				<div v-show="showSection" class="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<!-- Employee ID -->
 					<div>
 						<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span class="battambang-regular text-[16px]"> លេខសម្គាល់បុគ្គលិក</span></label>
@@ -64,11 +72,13 @@
 							class="mt-3 font-bold text-black" />
 					</div>
 					<!-- Leave Type -->
-					<div>
+					<div v-show="false">
 						<label for="leave-type">Leave Type / <span class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
 						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
 					</div>
+				</div>
 
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 					<!-- Number of Days Requested -->
 					<div>
 						<label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span></label>
@@ -95,9 +105,6 @@
 							</n-upload-dragger>
 						</n-upload>
 					</div>
-				</div>
-
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 					<!-- Date and Time Fields -->
 					<div>
 						<label for="from-date" class="pt-2 text-[16px]">From Date / <span class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span></label>
@@ -130,7 +137,6 @@
 						<n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
 					</div>
 				</div>
-
 				<div class="grid grid-cols-1 gap-4 my-5">
 					<div class="pt-8 text-center">
 						<button type="submit" class="w-1/2 text-lg py-2 px-4 bg-gray-300 text-blue-600 hover:text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-[#a02022] dark:bg-[#a02022] dark:hover:bg-[#a02022]">
@@ -138,9 +144,6 @@
 						</button>
 					</div>
 				</div>
-			</div>
-			<div v-if="showModal" class="loading-overlay">
-				<NSpin size="large" />
 			</div>
 		</form>
 	</div>
@@ -156,6 +159,11 @@ import { NSpin } from 'naive-ui';
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
 import { useRouter } from 'vue-router';
 
+const showSection = ref(true);  // Controls visibility of Employee Information section
+
+const toggleSection = () => {
+	showSection.value = !showSection.value;
+};
 const form = ref({
 	ReasonForLeave: "",
 	NumberOfDayrequested: "",

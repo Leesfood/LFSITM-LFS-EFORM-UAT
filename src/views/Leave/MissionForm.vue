@@ -69,9 +69,14 @@
 
 
 					<!-- Leave Type -->
-					<div>
+					<div v-show="false">
 						<label for="leave-type">Leave Type / <span class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
 						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+					</div>
+					<!-- desinationlocation -->
+					<div>
+						<label for="leave-desinationlocation">Desination location / <span class="battambang-regular pt-2 text-[16px]">គោលដៅត្រូវទៅ</span></label>
+						<n-input v-model:value="form.desinationlocation" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Number of Days Requested -->
@@ -176,6 +181,7 @@ const form = ref({
 	RequestTitleEN: "Mission Request form",
 	RequestTitleKH: "ពាក្យសុំអនុញ្ញាតិ ចុះបេសកកម្មការងារតាមខេត្ត",
 	LeaveType: "ចុះបេសកកម្មការងារតាមខេត្ត/Mission Request",
+	desinationlocation:"",
 	EmployeeID: "",
 	EmployeeName: "",
 	Site: "",
@@ -323,6 +329,7 @@ const submitForm = async () => {
 				RequestTitleKH: form.value.RequestTitleKH,
 				LeaveType: form.value.LeaveType,
 				ReasonForLeave: form.value.ReasonForLeave,
+				desinationlocation:form.value.desinationlocation,
 				NumberOfDayrequested: form.value.NumberOfDayrequested,
 				Phone: form.value.Phone,
 				FromDate: formatDateWithTime(form.value.FromDate, form.value.FromTime),

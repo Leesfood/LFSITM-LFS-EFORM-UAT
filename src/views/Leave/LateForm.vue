@@ -67,7 +67,7 @@
 							class="mt-3 font-bold text-black" />
 					</div>
 					<!-- Leave Type -->
-					<div>
+					<div v-show="false">
 						<label for="leave-type">Leave Type / <span class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
 						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
 					</div>

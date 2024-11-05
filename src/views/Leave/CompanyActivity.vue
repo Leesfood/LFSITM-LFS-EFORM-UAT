@@ -67,9 +67,14 @@
 							class="mt-3 font-bold text-black" />
 					</div>
 					<!-- Leave Type -->
-					<div>
+					<div v-show="false">
 						<label for="leave-type">Leave Type / <span class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
 						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+					</div>
+					<!-- Desinationlocation -->
+					<div>
+						<label for="leave-desinationlocation">Desination location / <span class="battambang-regular pt-2 text-[16px]">គោលដៅត្រូវទៅ</span></label>
+						<n-input v-model:value="form.desinationlocation" type="text" placeholder="" class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Number of Days Requested -->
@@ -174,6 +179,7 @@ const form = ref({
 	RequestTitleEN: "Company Activity Request form",
 	RequestTitleKH: "ពាក្យសុំអនុញ្ញាតិ ចុះបំពេញសកម្មភាពការងារក្រុមហ៊ុននៅខាងក្រៅការិយាល័យ",
 	LeaveType: "ចុះបំពេញសកម្មភាពការងារក្រុមហ៊ុននៅខាងក្រៅការិយាល័យ​/Company Activity",
+	desinationlocation:"",
 	EmployeeID: "",
 	EmployeeName: "",
 	Site: "",
@@ -288,6 +294,7 @@ const submitForm = async () => {
 		<p class="p-custom"><span class="custom-width">អ៊ីមែល:</span><span class="custom-span">${form.value.Email}</span></p>
 		<p class="p-custom"><span class="custom-width">អ្នកអនុញ្ញាត(Approver):</span><span class="custom-span">${form.value.Approver}</span></p>
 		<p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.ReasonForLeave}</span></p>
+		<p class="p-custom"><span class="custom-width">គោលដៅត្រូវទៅ:</span><span class="custom-span">${form.value.desinationlocation}</span></p>
 		<p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested}</span></p>
 		<p class="p-custom"><span class="custom-width">ចាប់ពីថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.FromDate, form.value.FromTime)}</span></p>
 		<p class="p-custom"><span class="custom-width">រហូតដល់ថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.ToDate, form.value.ToTime)}</span></p>
@@ -321,6 +328,7 @@ const submitForm = async () => {
 				RequestTitleKH: form.value.RequestTitleKH,
 				LeaveType: form.value.LeaveType,
 				ReasonForLeave: form.value.ReasonForLeave,
+				desinationlocation:form.value.desinationlocation,
 				NumberOfDayrequested: form.value.NumberOfDayrequested,
 				Phone: form.value.Phone,
 				FromDate: formatDateWithTime(form.value.FromDate, form.value.FromTime),

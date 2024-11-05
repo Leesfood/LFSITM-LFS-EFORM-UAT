@@ -31,7 +31,7 @@
               </button>
           </div>
       </div>
-
+      
       <!-- Responsive table -->
       <div class="bg-white shadow px-4 pb-5 overflow-x-auto">
     <table class="w-full table-auto border border-gray-200">
@@ -100,6 +100,10 @@
         </button>
       </div>
     </div>
+
+    <div v-if="showModal" class="loading-overlay">
+                <NSpin size="large" />
+            </div>
   </div>
 </template>
 
@@ -109,7 +113,7 @@ import { format, subDays } from "date-fns";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useLoadingBar } from 'naive-ui';
-
+const showModal = ref(false);
 // Define interface for the request items
 interface RequestData {
   RequestType:string;
@@ -321,6 +325,17 @@ function getRowClassSetColor(requeststatus:string) {
  </script>
 
 <style>
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .text-green {
   color: green;
   
