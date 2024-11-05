@@ -286,16 +286,9 @@ const submitForm = async () => {
 
 	const confirmMessage = `
 		<div style="text-align: left;">
-		<p class="p-custom"><span class="custom-width">លេខសម្គាល់បុគ្គលិក:</span><span class="custom-span">${form.value.EmployeeID}</span></p> 
-		<p class="p-custom"><span class="custom-width">ឈ្មោះបុគ្គលិក: </span><span class="custom-span">${form.value.EmployeeName}</span></p>
+		<p class="p-custom"><span class="custom-width">ឈ្មោះបុគ្គលិក:</span><span class="custom-span">${form.value.EmployeeName}(${form.value.EmployeeID})</span></p> 
 		<p class="p-custom"><span class="custom-width">អ៊ីមែល:</span><span class="custom-span">${form.value.Email}</span></p>
 		<p class="p-custom"><span class="custom-width">Line Manager:</span><span class="custom-span">${form.value.Approver}</span></p>
-		<p class="p-custom"><span class="custom-width">លេខទូរស័ព្ទ: </span><span class="custom-span">${form.value.Phone}</span></p>
-		<p class="p-custom"><span class="custom-width">ភេទ:</span><span class="custom-span">${form.value.Gender}</span></p>
-		<p class="p-custom"><span class="custom-width">នាយកដ្ឋាន:</span><span class="custom-span">${form.value.Department}</span></p>
-		<p class="p-custom"><span class="custom-width">តូនាទី:</span><span class="custom-span">${form.value.Position}</span></p>
-		<p class="p-custom"><span class="custom-width">ទីតាំង: </span><span class="custom-span">${form.value.Site}</span></p>
-		<p class="p-custom"><span class="custom-width">ប្រភេទការសុំច្បាប់:</span><span class="custom-span">${form.value.LeaveType}</span></p>
 		<p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.ReasonForLeave}</span></p>
 		<p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested}</span></p>
 		<p class="p-custom"><span class="custom-width">ចាប់ពីថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.FromDate, form.value.FromTime)}</span></p>
@@ -304,7 +297,7 @@ const submitForm = async () => {
 		</div>`;
 
 	const { isConfirmed } = await Swal.fire({
-		title: 'សូមពិនិត្យមើលម្តងទៀត​​មុនពេលបញ្ជូនសំណើរ',
+		title: form.value.LeaveType,
 		html: confirmMessage,
 		showCancelButton: true,
 		confirmButtonColor: '#008000',
