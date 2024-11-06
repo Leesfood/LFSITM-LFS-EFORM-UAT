@@ -73,10 +73,10 @@
 						<label for="leave-type">Leave Type / <span class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
 						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
 					</div>
-					<!-- desinationlocation -->
+					<!-- Desinationlocation -->
 					<div>
 						<label for="leave-desinationlocation">Desination location / <span class="battambang-regular pt-2 text-[16px]">គោលដៅត្រូវទៅ</span></label>
-						<n-input v-model:value="form.desinationlocation" type="text" placeholder="" readonly class="mt-3 font-bold text-black" />
+						<n-input v-model:value="form.desinationlocation" type="text" placeholder="" class="mt-3 font-bold text-black" />
 					</div>
 
 					<!-- Number of Days Requested -->
