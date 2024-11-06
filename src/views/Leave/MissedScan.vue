@@ -1,16 +1,24 @@
 <template>
-	<div class=" bg-white h-full pb-5">
+	<div class="rounded-md shadow dark:border bg-white dark:bg-gray-200 dark:border-gray-100  h-full">
 		<form @submit.prevent="submitForm">
-			<div class="w-full  ">
-				
+
+			<div>
 				<p class="py-5 text-2xl battambang-regular text-center uppercase  text-black">
 					ពាក្យសុំអនុញ្ញាតិ​​ មិនបានស្កេន <br> Missed Scan Request form
 				</p>
 			</div>
-			<div
-				class="md:p-6 lg:p-10 bg-white rounded-xl shadow dark:border dark:bg-gray-800 dark:border-gray-700">
-
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+			<div class=" p-4 md:p-6 lg:p-10  ">
+				<!-- Collapsible Employee Information Section -->
+				<div @click="toggleSection"
+					class="cursor-pointer font-bold text-lg text-blue-600 bg-gray-200 mb-4 flex justify-start items-center p-2 rounded-lg">
+					<span>Employee information detail</span>
+					<span class="ml-2">
+						<span v-if="showSection"><i class="fas fa-chevron-down"></i></span>
+						<span v-else><i class="fas fa-chevron-right"></i></span>
+					</span>
+				</div>
+				<!-- Collapsible Employee Information Section -->
+				<div v-show="showSection" class="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<!-- Employee ID -->
 					<div>
 						<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span
@@ -84,8 +92,8 @@
 					<div v-show="false">
 						<label for="leave-type">Leave Type / <span
 								class="battambang-regular pt-2 text-[16px]">ប្រភេទការសុំច្បាប់</span></label>
-						<n-input v-model:value="form.LeaveType" type="text" placeholder="មិនបានស្កេន/ Missed Scan Request" readonly
-							class="mt-3 font-bold text-black" />
+						<n-input v-model:value="form.LeaveType" type="text"
+							placeholder="មិនបានស្កេន/ Missed Scan Request" readonly class="mt-3 font-bold text-black" />
 					</div>
 
 
@@ -95,15 +103,32 @@
 								class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span></label>
 						<n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" />
 					</div> -->
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-5">
+					<!-- Date and Time Fields -->
+					<div>
+						<label for="from-date" class="pt-2 text-[16px]">From Date / <span
+								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span><span class="text-red-800">**</span></label>
+						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3"
+							:default-value="Date.now()" :is-date-disabled="dateDisabled" />
+					</div>
+					<div>
+						<label for="from-time" class="pt-2 text-[16px]">From Time / <span
+								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span><span class="text-red-800">**</span></label>
+						<n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
+					</div>
 					<!-- Reason for Leave -->
 					<div>
 						<label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span
-								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span></label>
+								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span><span class="text-red-800">**</span></label>
 						<n-input v-model:value="form.ReasonForLeave" type="textarea" class="mt-3" />
 					</div>
+
+				</div>
+				<!-- attachment file or image -->
+				<div class="grid grid-cols-1 gap-4 my-5">
 					<div>
-						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref.
-							documents</label>
+						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref. documents(Optional)</label>
 						<n-upload class="mt-3" v-model:value="form.Attachements" directory-dnd :max="1"
 							@change="handleUploadChange" @finish="handleUploadFinish" @error="handleUploadError"
 							:key="uploadKey" :show-file-list="true" :on-error="handleUploadError">
@@ -120,24 +145,7 @@
 							</n-upload-dragger>
 						</n-upload>
 					</div>
-
 				</div>
-
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-					<!-- Date and Time Fields -->
-					<div>
-						<label for="from-date" class="pt-2 text-[16px]">From Date / <span
-								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span></label>
-						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3"
-							:default-value="Date.now()" :is-date-disabled="dateDisabled" />
-					</div>
-					<div>
-						<label for="from-time" class="pt-2 text-[16px]">From Time / <span
-								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span></label>
-						<n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
-					</div>
-				</div>
-
 
 
 				<div class="grid grid-cols-1 gap-4 my-5">
@@ -166,7 +174,11 @@ import { useLoadingBar } from 'naive-ui';
 import { NSpin } from 'naive-ui';
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
 import { useRouter } from 'vue-router';
+const showSection = ref(true);  // Controls visibility of Employee Information section
 
+const toggleSection = () => {
+	showSection.value = !showSection.value;
+};
 // Form data
 const form = ref({
 
@@ -194,7 +206,7 @@ const form = ref({
 	EmailAcknowledge: "",
 
 	telegramchatidApprover: "",
-	allowdate: "1", 
+	allowdate: "1",
 });
 
 const employeeId = ref(null);

@@ -7,7 +7,17 @@
 				</p>
 			</div>
 			<div class="  p-4 md:p-6 lg:p-10   ">
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<!-- Collapsible Employee Information Section -->
+				<div @click="toggleSection"
+					class="cursor-pointer font-bold text-lg text-blue-600 bg-gray-200 mb-4 flex justify-start items-center p-2 rounded-lg">
+					<span>Employee information detail</span>
+					<span class="ml-2">
+						<span v-if="showSection"><i class="fas fa-chevron-down"></i></span>
+						<span v-else><i class="fas fa-chevron-right"></i></span>
+					</span>
+				</div>
+
+				<div v-show="showSection" class="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<!-- Employee ID -->
 					<div>
 						<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span
@@ -15,7 +25,6 @@
 						<n-input v-model:value="form.EmployeeID" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Name -->
 					<div>
 						<label for="name" class="pt-2 text-[16px]">Employee Name / <span
@@ -23,7 +32,6 @@
 						<n-input v-model:value="form.EmployeeName" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Email -->
 					<div>
 						<label for="email" class="pt-2 text-[16px] ">Email / <span
@@ -31,7 +39,6 @@
 						<n-input v-model:value="form.Email" type="text" placeholder="Enter your email" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Department -->
 					<div>
 						<label for="department" class="pt-2 text-[16px]">Department / <span
@@ -39,7 +46,6 @@
 						<n-input v-model:value="form.Department" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Position -->
 					<div>
 						<label for="position" class="pt-2 text-[16px]">Position / <span
@@ -47,7 +53,6 @@
 						<n-input v-model:value="form.Position" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Site -->
 					<div>
 						<label for="site" class="pt-2 text-[16px]">Site / <span
@@ -55,21 +60,18 @@
 						<n-input v-model:value="form.Site" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Approver -->
 					<div>
 						<label for="approver" class="pt-2 text-[16px]">Line Manager Email</label>
 						<n-input v-model:value="form.Approver" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Phone -->
 					<div>
 						<label for="phone" class="pt-2 text-[16px] ">Phone / <span
 								class="battambang-regular text-[16px]">លេខទូរស័ព្ទ</span></label>
 						<n-input v-model:value="form.Phone" type="text" class="mt-3  " />
 					</div>
-
 					<!-- Gender -->
 					<div>
 						<label for="gender" class=" pt-2 text-[16px]">Gender / <span
@@ -78,7 +80,6 @@
 						<n-input v-model:value="form.Gender" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
 					<!-- Leave Type -->
 					<div v-show="false">
 						<label for="leave-type">Leave Type / <span
@@ -86,25 +87,68 @@
 						<n-input v-model:value="form.LeaveType" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
-
-					<!-- Number of Days Requested -->
-					<div>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+										<!-- Number of Days Requested -->
+										<div>
 						<label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span
-								class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span></label>
+								class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span><span class="text-red-800">**</span></label>
 						<n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" />
 					</div>
-
 					<!-- Reason for Leave -->
 					<div>
 						<label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span
-								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span></label>
+								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span><span class="text-red-800">**</span></label>
 						<n-input v-model:value="form.ReasonForLeave" type="textarea" class="mt-3" />
 					</div>
 
-					<!-- attachment file or image -->
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">				
+					<!-- Date and Time Fields -->
 					<div>
-						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref.
-							documents</label>
+						<label for="from-date" class="pt-2 text-[16px]">From Date / <span
+								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span><span class="text-red-800">**</span></label>
+						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3"
+							:is-date-disabled="dateDisabled" />
+					</div>
+					<div>
+						<label for="from-time" class="pt-2 text-[16px]">From Time / <span
+								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span><span class="text-red-800">**</span></label>
+						<n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+					<div>
+						<label for="to-date" class="pt-2 text-[16px]">To Date / <span
+								class="battambang-regular text-[16px]">រហូតដល់ថ្ងៃ</span><span class="text-red-800">**</span></label>
+						<n-date-picker v-model:value="form.ToDate" type="date" class="mt-3"
+							:is-date-disabled="dateDisabled" />
+					</div>
+					<div>
+						<label for="to-time" class="pt-2 text-[16px]">To Time / <span
+								class="battambang-regular text-[16px]">រហូតដល់ម៉ោង</span><span class="text-red-800">**</span></label>
+						<n-time-picker v-model:value="form.ToTime" format="h:mm a" class="mt-3" />
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+					<div>
+						<label for="back-date" class="pt-2 text-[16px]">Date back to work / <span
+								class="battambang-regular text-[16px]">ថ្ងៃត្រឡប់មកធ្វើការវិញ</span><span class="text-red-800">**</span></label>
+						<n-date-picker v-model:value="form.BackDate" type="date" class="mt-3"
+							:is-date-disabled="dateDisabled" />
+					</div>
+					<div>
+						<label for="back-time" class="pt-2 text-[16px]">Time back to work / <span
+								class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span><span class="text-red-800">**</span></label>
+						<n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
+					</div>
+				</div>
+					<!-- attachment file or image -->
+					<div class="grid grid-cols-1 gap-4 my-5">
+					<div>
+						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref. documents(Optional)</label>
 						<n-upload class="mt-3" v-model:value="form.Attachements" directory-dnd :max="1"
 							@change="handleUploadChange" @finish="handleUploadFinish" @error="handleUploadError"
 							:key="uploadKey" :show-file-list="true" :on-error="handleUploadError">
@@ -117,49 +161,6 @@
 								<n-text style="font-size: 16px">Drag a file to this area to upload</n-text>
 							</n-upload-dragger>
 						</n-upload>
-					</div>
-				</div>
-
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-					<!-- Date and Time Fields -->
-					<div>
-						<label for="from-date" class="pt-2 text-[16px]">From Date / <span
-								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span></label>
-						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3"
-							:is-date-disabled="dateDisabled" />
-					</div>
-					<div>
-						<label for="from-time" class="pt-2 text-[16px]">From Time / <span
-								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span></label>
-						<n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
-					</div>
-				</div>
-
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-					<div>
-						<label for="to-date" class="pt-2 text-[16px]">To Date / <span
-								class="battambang-regular text-[16px]">រហូតដល់ថ្ងៃ</span></label>
-						<n-date-picker v-model:value="form.ToDate" type="date" class="mt-3"
-							:is-date-disabled="dateDisabled" />
-					</div>
-					<div>
-						<label for="to-time" class="pt-2 text-[16px]">To Time / <span
-								class="battambang-regular text-[16px]">រហូតដល់ម៉ោង</span></label>
-						<n-time-picker v-model:value="form.ToTime" format="h:mm a" class="mt-3" />
-					</div>
-				</div>
-
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-					<div>
-						<label for="back-date" class="pt-2 text-[16px]">Date back to work / <span
-								class="battambang-regular text-[16px]">ថ្ងៃត្រឡប់មកធ្វើការវិញ</span></label>
-						<n-date-picker v-model:value="form.BackDate" type="date" class="mt-3"
-							:is-date-disabled="dateDisabled" />
-					</div>
-					<div>
-						<label for="back-time" class="pt-2 text-[16px]">Time back to work / <span
-								class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span></label>
-						<n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
 					</div>
 				</div>
 
@@ -188,7 +189,11 @@ import { useLoadingBar } from 'naive-ui';
 import { NSpin } from 'naive-ui';
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
 import { useRouter } from 'vue-router';
+const showSection = ref(true);  // Controls visibility of Employee Information section
 
+const toggleSection = () => {
+	showSection.value = !showSection.value;
+};
 const form = ref({
 	ReasonForLeave: "",
 	NumberOfDayrequested: "",
