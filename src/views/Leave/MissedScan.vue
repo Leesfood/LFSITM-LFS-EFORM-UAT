@@ -10,16 +10,16 @@
 			<div class=" p-4 md:p-6 lg:p-10  ">
 				<!-- Collapsible Employee Information Section -->
 				<div @click="toggleSection"
-					class="cursor-pointer font-bold text-lg text-blue-600 bg-gray-200 mb-4 flex justify-start items-center p-2 rounded-lg">
-					<span>Employee information detail</span>
-					<span class="ml-2">
-						<span v-if="showSection"><i class="fas fa-chevron-down"></i></span>
-						<span v-else><i class="fas fa-chevron-right"></i></span>
-					</span>
-				</div>
-				<!-- Collapsible Employee Information Section -->
-				<div v-show="showSection" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-					<!-- Employee ID -->
+     class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 rounded-lg p-4 mb-4 flex justify-between items-center shadow-md border border-gray-300">
+  <span>Employee Information Detail</span>
+  <span>
+    <i :class="showSection ? 'fas fa-chevron-up text-blue-600' : 'fas fa-chevron-down text-gray-600'"></i>
+  </span>
+</div>
+
+<div v-show="showSection"
+     class="overflow-hidden p-4 bg-white rounded-lg transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 md:grid-cols-3 gap-4 shadow-inner border border-gray-200">         <!-- Employee ID -->
+  					<!-- Employee ID -->
 					<div>
 						<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span
 								class="battambang-regular text-[16px]"> លេខសម្គាល់បុគ្គលិក</span></label>
@@ -108,19 +108,22 @@
 					<!-- Date and Time Fields -->
 					<div>
 						<label for="from-date" class="pt-2 text-[16px]">From Date / <span
-								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span><span class="text-red-800">**</span></label>
+								class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span><span
+								class="text-red-800">**</span></label>
 						<n-date-picker v-model:value="form.FromDate" type="date" class="mt-3"
 							:default-value="Date.now()" :is-date-disabled="dateDisabled" />
 					</div>
 					<div>
 						<label for="from-time" class="pt-2 text-[16px]">From Time / <span
-								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span><span class="text-red-800">**</span></label>
+								class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span><span
+								class="text-red-800">**</span></label>
 						<n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
 					</div>
 					<!-- Reason for Leave -->
 					<div>
 						<label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span
-								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span><span class="text-red-800">**</span></label>
+								class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span><span
+								class="text-red-800">**</span></label>
 						<n-input v-model:value="form.ReasonForLeave" type="textarea" class="mt-3" />
 					</div>
 
@@ -128,7 +131,8 @@
 				<!-- attachment file or image -->
 				<div class="grid grid-cols-1 gap-4 my-5">
 					<div>
-						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref. documents(Optional)</label>
+						<label for="attachements" class="pt-2  battambang-regular text-[16px]">ឯកសារយោង/ Ref.
+							documents(Optional)</label>
 						<n-upload class="mt-3" v-model:value="form.Attachements" directory-dnd :max="1"
 							@change="handleUploadChange" @finish="handleUploadFinish" @error="handleUploadError"
 							:key="uploadKey" :show-file-list="true" :on-error="handleUploadError">

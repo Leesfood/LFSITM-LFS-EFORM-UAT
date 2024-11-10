@@ -5,12 +5,10 @@ import './assets/main.css';
 
 import DashboardLayout from './components/DashboardLayout.vue';
 import EmptyLayout from './components/EmptyLayout.vue';
-
 import { create, NButton, NSelect, NInput, NDatePicker, NForm, NFormItem, NTimePicker, NLoadingBarProvider, NUpload, NUploadDragger, NIcon, NText, NP } from 'naive-ui';
 
 try {
   const app = createApp(App);
-
   const naive = create({
     components: [
       NButton,
