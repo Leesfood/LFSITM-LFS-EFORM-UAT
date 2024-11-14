@@ -11,15 +11,15 @@
 				<div class="  p-4 md:p-6 lg:p-10   ">
 					<!-- Collapsible Employee Information Section -->
 					<div @click="toggleSection"
-     class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 rounded-lg p-4 mb-4 flex justify-between items-center shadow-md border border-gray-300">
-  <span>Employee Information Detail</span>
+     class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 p-2  flex justify-between items-center shadow-md border border-gray-300">
+  <span>Employee information detail</span>
   <span>
     <i :class="showSection ? 'fas fa-chevron-up text-blue-600' : 'fas fa-chevron-down text-gray-600'"></i>
   </span>
 </div>
 
 <div v-show="showSection"
-     class="overflow-hidden p-4 bg-white rounded-lg transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 md:grid-cols-3 gap-4 shadow-inner border border-gray-200">         <!-- Employee ID -->
+     class="overflow-hidden p-4 bg-white mb-4 transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 md:grid-cols-3 gap-4 shadow-inner border border-gray-200">         <!-- Employee ID -->
   					<!-- Employee ID -->
 						<div>
 							<label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span
@@ -98,6 +98,13 @@
 								class="mt-3 font-bold text-black" />
 						</div>
 					</div>
+ <!-- Request Information Detail -->
+ <div
+			class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 p-2 flex justify-between items-center shadow-md border border-gray-300">
+			<span>Request information detail</span>
+		  </div>
+		  <div 
+			class="overflow-hidden p-4 mb-4 bg-white transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 gap-4 shadow-inner border border-gray-200">
 
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 						<!-- Desinationlocation -->
@@ -191,7 +198,7 @@
 						</div>
 					</div>
 
-
+		  </div>
 					<div class="grid grid-cols-1 gap-4 my-5">
 						<div class="pt-8 text-center">
 							<button type="submit"
