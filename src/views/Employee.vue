@@ -8,26 +8,28 @@
           <div>
             <button @click="getAllEmployees"
               class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-              <p class="text-sm font-medium leading-none text-white text-center">Get All Employees</p>
+              <i class="fas fa-download mr-2 text-white"></i> <!-- Tasks icon -->
+
+              <p class="pl-2 text-sm font-medium leading-none text-white text-center">Get All Employees</p>
             </button>
           </div>
           <div>
             <router-link to="/employee/add">
-              <button
-                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 pl-4 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="w-5 h-5 text-white">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p class="text-sm font-medium leading-none text-white">Add Employee</p>
+              <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-3 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                <i class="fas fa-add mr-2 text-white"></i> <!-- Tasks icon -->
+                <p class="pl-2 text-sm font-medium leading-none text-white text-center">Add New Employees</p>
+
               </button>
             </router-link>
           </div>
           <div>
             <button @click="refreshEmployeesDATA"
               class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3  bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-              <p class="text-sm font-medium leading-none text-white text-center">Refresh Data</p>
+
+              <i class="fas fa-refresh mr-2 text-white"></i> <!-- Tasks icon -->
+
+
+              <p class="pl-2 text-sm font-medium leading-none text-white text-center">Refresh Data</p>
             </button>
           </div>
           <div class="mt-4 sm:mt-0 sm:ml-3">
@@ -40,7 +42,7 @@
       <!-- Responsive table -->
       <div class="bg-white shadow px-4 pb-5 overflow-x-auto">
         <table class="w-full table-auto border border-gray-200">
-          <thead>
+          <thead class="bg-gray-200">
             <tr class="w-full text-sm leading-none text-gray-800 border-b border-gray-200 whitespace-nowrap">
               <th class="font-normal py-2 text-center border-r border-gray-200">No</th>
               <th class="font-normal py-2 px-4 text-left border-r border-gray-200 hidden md:table-cell">ID</th>
