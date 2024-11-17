@@ -11,11 +11,13 @@
         <p class="text-lg text-gray-700 text-left">Maternity Leave (ML): 0 days</p>
     </div>
     <div class="bg-gradient-to-r from-yellow-300 to-yellow-200 p-6 rounded-lg shadow-lg w-full text-center transition-transform transform hover:scale-105">
-        <h3 class="text-2xl font-bold text-green-900">Pending Approvals:</h3>
-        <p class="text-lg text-gray-700 mt-2">Requests: 0</p>
+        <h3 class="text-2xl font-bold text-green-900">Your Requested:</h3>
+        <p class="text-lg text-gray-700 mt-2 text-left">Pending : {{ pendingCount }} Requests</p>
+        <p class="text-lg text-gray-700 mt-2 text-left">Rejected : {{ rejectedgCount }} Requests</p>
+        <p class="text-lg text-gray-700 mt-2 text-left">Approved : {{ approvedgCount }} Requests</p>
     </div>
     <div class="bg-gradient-to-r from-red-300 to-red-200 p-6 rounded-lg shadow-lg w-full text-center transition-transform transform hover:scale-105">
-        <h3 class="text-2xl font-bold text-yellow-900">Your Approvals:</h3>
+        <h3 class="text-2xl font-bold text-yellow-900">Waiting Your Approvals:</h3>
         <p class="text-lg text-gray-700 mt-2">Requests: 0</p>
     </div>
 </div>
@@ -53,11 +55,11 @@
             <!-- Loop through myrequest data -->
             <tr v-for="(requestlist, index) in paginatedMyrequestlist" :key="index" :class="['text-sm leading-none border-b border-gray-200 whitespace-nowrap']">
                 <td class="text-center border-r border-gray-200 py-2">{{ index + 1 }}</td>
-                <td class="px-4 py-4 text-left border-r border-gray-200 hidden md:table-cell">{{ requestlist.RequestType }}</td>
-                <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.FromDate }}</td>
-                <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.ToDate }}</td>
-                <td class="px-4 py-4 text-left border-r border-gray-200">{{ requestlist.LeaveReason}}</td>
-                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                <td class="px-4 py-2 text-left border-r border-gray-200 hidden md:table-cell">{{ requestlist.RequestType }}</td>
+                <td class="px-4 py-2 text-left border-r border-gray-200">{{ requestlist.FromDate }}</td>
+                <td class="px-4 py-2 text-left border-r border-gray-200">{{ requestlist.ToDate }}</td>
+                <td class="px-4 py-2 text-left border-r border-gray-200">{{ requestlist.LeaveReason}}</td>
+                <td class="px-4 py-2 text-sm whitespace-nowrap">
                 <div class="flex items-center gap-x-6">
                 <div class="flex justify-center">
                   <button @click="handleAction(requestlist, 'view')" 
@@ -101,9 +103,6 @@
       </div>
     </div>
 
-    <div v-if="showModal" class="loading-overlay">
-                <NSpin size="large" />
-            </div>
   </div>
 </template>
 
@@ -166,6 +165,7 @@ onMounted(() => {
 const myrequest = ref<RequestData[]>([]); 
 const currentPage = ref(1);
 const pageSize = 10;
+const pendingNumber=0;
 const loading = ref(false);
 const loadingBar = useLoadingBar();
 
@@ -321,7 +321,15 @@ function getRowClassSetColor(requeststatus:string) {
     }
 }
 
-    
+const pendingCount = computed(() => {
+  return myrequest.value.filter(request => request.Status.includes('Pending')).length;
+});
+const rejectedgCount = computed(() => {
+  return myrequest.value.filter(request => request.Status.includes('Rejected')).length;
+});
+const approvedgCount = computed(() => {
+  return myrequest.value.filter(request => request.Status.includes('Approved')).length;
+});   
  </script>
 
 <style>

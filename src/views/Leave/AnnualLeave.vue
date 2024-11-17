@@ -183,9 +183,6 @@
 			</div>
 		  </div>
 		</div>
-		<div v-if="showModal" class="loading-overlay">
-		  <NSpin size="large" />
-		</div>
 	  </form>
 	</div>
   </template>

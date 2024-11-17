@@ -43,9 +43,9 @@
           <thead>
             <tr class="w-full text-sm leading-none text-gray-800 border-b border-gray-200 whitespace-nowrap">
               <th class="font-normal py-2 text-center border-r border-gray-200">No</th>
-              <th class="font-normal py-4 px-4 text-left border-r border-gray-200 hidden md:table-cell">ID</th>
-              <th class="font-normal py-4 text-left px-4 border-r border-gray-200">Name</th>
-              <th class="font-normal py-4 text-left px-4 border-r border-gray-200">Gender</th>
+              <th class="font-normal py-2 px-4 text-left border-r border-gray-200 hidden md:table-cell">ID</th>
+              <th class="font-normal py-2 text-left px-4 border-r border-gray-200">Name</th>
+              <th class="font-normal py-2 text-left px-4 border-r border-gray-200">Gender</th>
               <th class="font-normal text-left px-4 border-r border-gray-200">Phone No.</th>
               <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Department</th>
               <!-- <th class="font-normal text-left px-4 border-r border-gray-200 hidden lg:table-cell">Section</th> -->
@@ -58,27 +58,27 @@
           <tbody>
             <tr v-for="(employee, index) in paginatedEmployees" :key="employee.employeeid"
               class="text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-gray-200">
-              <td class="px-4 py-4 flex items-center text-left border-r border-gray-200">{{ (currentPage - 1) * pageSize
+              <td class="px-2 py-2 flex items-center text-left border-r border-gray-200">{{ (currentPage - 1) * pageSize
                 + index + 1 }}</td>
-              <td class="px-4 border-r text-left border-gray-200 whitespace-nowrap hidden md:table-cell">{{
+              <td class="px-2 py-2 border-r text-left border-gray-200  hidden md:table-cell">{{
                 employee.employeeid }}</td>
-              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.employeename }}</td>
-              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">{{ employee.gender }}</td>
-              <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{
+              <td class="pl-2 py-2 border-r border-gray-200  whitespace-nowrap px-2">{{ employee.employeename }}</td>
+              <td class="pl-2 py-2 border-r border-gray-200  px-2">{{ employee.gender }}</td>
+              <td class="pl-2 py-2 border-r text-center border-gray-200  px-2">{{
                 formatPhone(employee.phone) }}</td>
 
-              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{
+              <td class="pl-2 py-2 border-r border-gray-200 px-2 hidden lg:table-cell">{{
                 employee.department }}</td>
               <!-- <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden lg:table-cell">{{ employee.section
                 }}</td> -->
-              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4 hidden xl:table-cell">{{ employee.site }}
+              <td class="pl-2 py-2 border-r border-gray-200  px-2 hidden xl:table-cell">{{ employee.site }}
               </td>
-              <td class="pl-4 border-r border-gray-200 whitespace-nowrap px-4">
+              <td class="pl-2 py-2 border-r border-gray-200  px-2">
                 <span v-if="employee.email === '0'" class="text-red-600">No email</span>
                 <span v-else class="text-blue-600">{{ employee.email }}</span>
               </td>
               <td
-                class="pl-4 border-r border-gray-200 text-blue-600 underline whitespace-nowrap px-4 hidden xl:table-cell">
+                class="pl-2 py-2 border-r border-gray-200 text-blue-600 underline  px-2 hidden xl:table-cell flex justify-center">
                 {{ employee.status }}</td>
               <!--  
               <td class="pl-4 border-r text-center border-gray-200 whitespace-nowrap px-4">{{ employee.allowdate }}</td>
@@ -86,7 +86,7 @@
                 <span v-if="employee.status === 'inactive'" class="text-red-600">Inactive</span>
                 <span v-else class="text-green-600">{{ employee.status }}</span>
               </td> -->
-              <td class="px-4 py-4 text-sm whitespace-nowrap">
+              <td class="px-2 py-2 text-sm whitespace-nowrap">
                 <div class="flex items-center gap-x-6">
                   <button  @click="editEmployee(employee)"
                     class="text-blue-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
