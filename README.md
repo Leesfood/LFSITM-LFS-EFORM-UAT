@@ -34,7 +34,7 @@ setup Enviroment
 download NVM https://github.com/coreybutler/nvm-windows/releases
 nvm install 18
 nvm use 18
-```
+-------------
 Deploy Firebase
 1. Open your terminal and run:
 
@@ -50,7 +50,7 @@ firebase --version
   
 4. Firebase deploy
   Firebase deploy
-
+```
 
 ### Compiles and hot-reloads for development
 
