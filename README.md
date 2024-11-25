@@ -29,12 +29,28 @@ module.exports = {
 ## Project setup
 
 ```
-pdonwload Node Js
-psetup Enviroment 
-pdownload NVM https://github.com/coreybutler/nvm-windows/releases
-pnvm install 18
+donwload Node Js
+setup Enviroment 
+download NVM https://github.com/coreybutler/nvm-windows/releases
+nvm install 18
 nvm use 18
 ```
+Deploy Firebase
+1. Open your terminal and run:
+
+npm install -g firebase-tools
+  
+2. Verify the installation:
+
+firebase --version
+  
+3. firebase login
+
+  firebase login
+  
+4. Firebase deploy
+  Firebase deploy
+
 
 ### Compiles and hot-reloads for development
 
