@@ -89,8 +89,7 @@
         </div>
     </div>
 </div>
-
-            </div>
+</div>
             <div v-else class="text-center text-gray-500 dark:text-gray-400">
                 Employee data not found.
             </div>

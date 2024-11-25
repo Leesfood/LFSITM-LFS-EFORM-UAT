@@ -29,7 +29,11 @@ module.exports = {
 ## Project setup
 
 ```
-pnpm install
+pdonwload Node Js
+psetup Enviroment 
+pdownload NVM https://github.com/coreybutler/nvm-windows/releases
+pnvm install 18
+nvm use 18
 ```
 
 ### Compiles and hot-reloads for development

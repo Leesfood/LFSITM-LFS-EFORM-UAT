@@ -19,3 +19,82 @@
 ::-webkit-scrollbar-thumb:hover{
   background: #718096;
 }
+.circle-icon {
+  border: 1px solid rgb(137, 137, 137); /* Border color */
+  border-radius: 50%;    /* Makes it circular */
+  width: 30px;           /* Circle diameter */
+  height: 30px;
+  display: flex;
+  align-items: center;   /* Centers the icon vertically */
+  justify-content: center; /* Centers the icon horizontally */
+  font-size: 16px;       /* Icon size */
+}
+.battambang-thin {
+	font-family: "Battambang", system-ui;
+	font-weight: 100;
+	font-style: normal;
+  }
+  
+  .battambang-light {
+	font-family: "Battambang", system-ui;
+	font-weight: 300;
+	font-style: normal;
+  }
+  
+  .battambang-regular {
+	font-family: "Battambang", system-ui;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+  .battambang-bold {
+	font-family: "Battambang", system-ui;
+	font-weight: 700;
+	font-style: normal;
+  }
+  
+  .battambang-black {
+	font-family: "Battambang", system-ui;
+	font-weight: 900;
+	font-style: normal;
+  }
+  .sweet-alert-custom {
+    width: 600px !important;
+    
+    max-width: 90% !important;
+    }
+    
+    .sweet-alert-title {
+    color: red;
+    font-size: 20px;
+    font-family: "Battambang", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-weight: bold;
+    }
+    
+    .p-custom {
+    color: black;
+    font-size: 15px;
+    padding: 5px;
+    font-family: "Battambang", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    }
+    
+    .custom-span {
+    font-size: 16px;
+    padding-left: 20px;
+    color: green;
+    }
+    
+    .sweet-alert-icon {
+    width: 20px;
+    height: 20px;
+    }
+    
+    @media (max-width: 600px) {
+    .sweet-alert-custom {
+      width: 90% !important;
+    }
+    }

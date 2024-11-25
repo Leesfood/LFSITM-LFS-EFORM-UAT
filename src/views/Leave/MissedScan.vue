@@ -10,11 +10,11 @@
 			<div class=" p-4 md:p-6 lg:p-10  ">
 				<!-- Collapsible Employee Information Section -->
 				<div @click="toggleSection"
-     class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300  p-2  flex justify-between items-center shadow-md border border-gray-300">
-  <span>Employee Information Detail</span>
-  <span>
-    <i :class="showSection ? 'fas fa-chevron-up text-blue-600' : 'fas fa-chevron-down text-gray-600'"></i>
-  </span>
+				class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 p-2 flex justify-start items-center shadow-md border border-gray-300">
+			<span>
+			  <i :class="showSection ? 'fas fa-minus text-gray-600' : 'fas fa-plus text-gray-600'" class="circle-icon"></i>
+			</span>
+      <span class="pl-2">Employee information detail</span>
 </div>
 
 <div v-show="showSection"
@@ -70,7 +70,7 @@
 					<!-- Approver -->
 					<div>
 						<label for="approver" class="pt-2 text-[16px]">Line Manager Email</label>
-						<n-input v-model:value="form.Approver" type="text" placeholder="" readonly
+						<n-input v-model:value="form.EmailApprover" type="text" placeholder="" readonly
 							class="mt-3 font-bold text-black" />
 					</div>
 					<!-- Phone -->
@@ -101,8 +101,11 @@
 				</div>
 				 <!-- Request Information Detail -->
  <div
-			class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 p-2 flex justify-between items-center shadow-md border border-gray-300">
-			<span>Request information detail</span>
+ class="cursor-pointer font-semibold text-lg text-blue-600 bg-gray-100 hover:bg-gray-200 transition-all duration-300 p-2 flex justify-start items-center shadow-md border border-gray-300">
+			<span>
+			  <i class="fas fa-minus text-gray-600 circle-icon"></i>
+			</span>
+      <span class="pl-2">Request information detail</span>
 		  </div>
 		  <div 
 			class="overflow-hidden p-4 mb-4 bg-white transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 gap-4 shadow-inner border border-gray-200">
@@ -199,6 +202,7 @@ const form = ref({
 	NumberOfDayrequested: "0",
 	Phone: "",
 	Email: "",
+	EmailApprover:"",
 	Gender: "",
 	FromDate: null,
 	FromTime: null,
@@ -240,7 +244,7 @@ onMounted(async () => {
 		form.value.EmployeeID = employeeData.EmployeeID;
 		form.value.EmployeeName = employeeData.EmployeeName;
 		form.value.Email = employeeData.Email;
-		form.value.Approver = employeeData.ApproverEmail;
+		form.value.EmailApprover = employeeData.ApproverEmail;
 		form.value.Department = employeeData.Department;
 		form.value.Position = employeeData.Section;
 		form.value.Site = employeeData.Site;
@@ -324,27 +328,31 @@ onMounted(() => {
 	form.value.BackTime = currentDate;
 });
 
-
+const requiredFields = [
+	"EmployeeID",
+    "Email",
+    "EmailApprover",
+    "Phone",
+    "Gender",
+    "LeaveType",
+    "FromDate",
+    "FromTime",  
+	"ReasonForLeave",  
+];
 const submitForm = async () => {
-	if (
-		!form.value.Email ||
-		!form.value.FromDate ||
-		!form.value.FromTime ||
-		!form.value.ReasonForLeave ||
-		!form.value.Phone ||
-		!form.value.Gender ||
-		!form.value.LeaveType ||
-		!form.value.EmployeeID
-	) {
-		Swal.fire("បរាជ័យ", "ត្រូវបំពេញព័ត៌មានសំខាន់ៗ​ទាំងអស់", "error");
-		return;
+	// Check requiredFields
+	for (const field of requiredFields) {
+    if (!form.value[field]) {
+        Swal.fire("បរាជ័យ", "ត្រូវបំពេញព័ត៌មាន " +field, "error");
+        return;
+    }
 	}
 
 	const confirmMessage = `
         <div style="text-align: left;">
             <p class="p-custom"><span class="custom-width">ឈ្មោះបុគ្គលិក:</span><span class="custom-span">${form.value.EmployeeName}(${form.value.EmployeeID})</span></p> 
             <p class="p-custom"><span class="custom-width">អ៊ីមែល:</span><span class="custom-span">${form.value.Email}</span></p>
-            <p class="p-custom"><span class="custom-width">អ្នកអនុញ្ញាត(Approver):</span><span class="custom-span">${form.value.Approver}</span></p>
+            <p class="p-custom"><span class="custom-width">អ្នកអនុញ្ញាត(Approver):</span><span class="custom-span">${form.value.EmailApprover}</span></p>
             <p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.ReasonForLeave}</span></p>
             <p class="p-custom"><span class="custom-width">នៅថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.FromDate, form.value.FromTime)}</span></p>
         </div>`;
@@ -447,75 +455,5 @@ const submitForm = async () => {
 	/* Use a high value to ensure visibility */
 }
 
-.sweet-alert-custom {
-	width: 600px !important;
 
-	max-width: 90% !important;
-
-}
-
-.sweet-alert-title {
-	color: red;
-	font-size: 20px;
-	font-family: "Battambang", system-ui;
-	font-weight: 400;
-	font-style: normal;
-	font-weight: bold;
-}
-
-.p-custom {
-	color: black;
-	font-size: 15px;
-	padding: 5px;
-	font-family: "Battambang", system-ui;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.custom-span {
-	font-size: 16px;
-	padding-left: 20px;
-	color: green;
-}
-
-.sweet-alert-icon {
-	width: 20px;
-	height: 20px;
-}
-
-@media (max-width: 600px) {
-	.sweet-alert-custom {
-		width: 90% !important;
-	}
-}
-
-.battambang-thin {
-	font-family: "Battambang", system-ui;
-	font-weight: 100;
-	font-style: normal;
-}
-
-.battambang-light {
-	font-family: "Battambang", system-ui;
-	font-weight: 300;
-	font-style: normal;
-}
-
-.battambang-regular {
-	font-family: "Battambang", system-ui;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.battambang-bold {
-	font-family: "Battambang", system-ui;
-	font-weight: 700;
-	font-style: normal;
-}
-
-.battambang-black {
-	font-family: "Battambang", system-ui;
-	font-weight: 900;
-	font-style: normal;
-}
 </style>
