@@ -2,11 +2,8 @@
 	<div class="rounded-md shadow dark:border bg-white dark:bg-gray-200 dark:border-gray-100  h-full">
 		<form @submit.prevent="submitForm">
 			<div>
-
-				<p class="py-5 text-2xl battambang-regular text-center uppercase  text-black">
-					ពាក្យសុំអនុញ្ញាតិ​​ ចេញមុន <br> Early leave Request form
-				</p>
-			</div>
+			<div class="py-5 text-2xl battambang-regular text-center uppercase  text-black" v-html="form.RequestTitleKH + '<br>' + form.RequestTitleEN"></div>
+		</div>
 			<div class="  p-4 md:p-6 lg:p-10   ">
 				<!-- Collapsible Employee Information Section -->
 				<div @click="toggleSection"

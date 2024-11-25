@@ -35,6 +35,11 @@
 
           <span class="mx-4">HR EForm Listing</span>
         </router-link>
+        <router-link v-if="allowedRoutes.resignationForm" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'ResignationForm' ? activeClass : inactiveClass]" to="/resignationForm">
+          <i class="fas fa-paper-plane w-5 h-5"></i>
+          <span class="mx-4">ResignationForm</span>
+        </router-link>
         <router-link v-if="allowedRoutes.myrequest" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'MyRequest' ? activeClass : inactiveClass]" to="/myrequest">
           <i class="fas fa-paper-plane w-5 h-5"></i>
@@ -118,7 +123,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useSidebar } from '../composables/useSidebar'
-import MyAssets from '../views/MyAssets/MyAssets.vue';
+
 
 
 
@@ -139,6 +144,7 @@ const allowedRoutes = computed(() => {
   return {
     dashboard: true, // accessible to everyone
     employee: ['1', '2'].includes(userRole), // only visible for roles 1 and 2
+    resignationForm:['2',].includes(userRole),
     myrequest: ['0','1','2'].includes(userRole),
     myassets:['2'].includes(userRole),
     uiElements: userRole === '2',

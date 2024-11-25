@@ -24,7 +24,7 @@ import View from './views/Employees/View.vue'
 import Edit from './views/Employees/Edit.vue'
 import MyRequest from './views/MyRequest/MyRequest.vue'
 import MyAssets from './views/MyAssets/MyAssets.vue'
-
+import ResignationForm from './views/eform/resignationform/ResignationForm.vue'
 //1' HR role
 //'2' admin
 //'0' users
@@ -40,6 +40,12 @@ const routes: RouteRecordRaw[] = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { roles: ['1', '2','0'] }
+  },
+  {
+    path: '/resignationform',
+    name: 'Resignationform',
+    component:ResignationForm,
+    meta: { roles: ['2'] }
   },
   {
     path: '/myrequest',

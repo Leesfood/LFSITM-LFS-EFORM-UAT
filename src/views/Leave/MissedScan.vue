@@ -3,10 +3,8 @@
 		<form @submit.prevent="submitForm">
 
 			<div>
-				<p class="py-5 text-2xl battambang-regular text-center uppercase  text-black">
-					ពាក្យសុំអនុញ្ញាតិ​​ មិនបានស្កេន <br> Missed Scan Request form
-				</p>
-			</div>
+			<div class="py-5 text-2xl battambang-regular text-center uppercase  text-black" v-html="form.RequestTitleKH + '<br>' + form.RequestTitleEN"></div>
+		</div>
 			<div class=" p-4 md:p-6 lg:p-10  ">
 				<!-- Collapsible Employee Information Section -->
 				<div @click="toggleSection"
@@ -210,8 +208,8 @@ const form = ref({
 	ToTime: null,
 	BackDate: null,
 	BackTime: null,
-	RequestTitleEN: "Company Activity Request form",
-	RequestTitleKH: "ពាក្យសុំអនុញ្ញាតិ ចុះបំពេញសកម្មភាពការងារក្រុមហ៊ុននៅខាងក្រៅការិយាល័យ",
+	RequestTitleEN: "Missed Scan Request form",
+	RequestTitleKH: "ពាក្យសុំអនុញ្ញាតិ​​ មិនបានស្កេន",
 	LeaveType: "មិនបានស្កេន/ Missed Scan Request",
 	EmployeeID: "",
 	EmployeeName: "",

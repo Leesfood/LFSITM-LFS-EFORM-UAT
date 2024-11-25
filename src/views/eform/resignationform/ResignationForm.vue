@@ -98,13 +98,6 @@
 			class="overflow-hidden p-4 mb-4 bg-white transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 gap-4 shadow-inner border border-gray-200">
   
 		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<!-- Number of Days Requested -->
-			<div>
-			  <label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span
-				  class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span><span
-				  class="text-red-800">**</span></label>
-			  <n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" />
-			</div>
 			<!-- Reason for Leave -->
 			<div>
 			  <label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span
@@ -112,8 +105,15 @@
 				  class="text-red-800">**</span></label>
 			  <n-input v-model:value="form.ReasonForLeave" type="textarea" class="mt-3" />
 			</div>
-  
+  <!-- Number of Days Requested -->
+  <div>
+			  <label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span
+				  class="battambang-regular text-[16px]">ចំនូនថ្ងៃដែលស្នើសុំ</span><span
+				  class="text-red-800">**</span></label>
+			  <n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" />
+			</div>
 		  </div>
+
 		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
 			<!-- Date and Time Fields -->
 			<div>
@@ -122,39 +122,12 @@
 			  <n-date-picker v-model:value="form.FromDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
 			</div>
 			<div>
-			  <label for="from-time" class="pt-2 text-[16px]">From Time / <span
-				  class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span><span class="text-red-800">**</span></label>
-			  <n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
-			</div>
-		  </div>
-  
-		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<div>
 			  <label for="to-date" class="pt-2 text-[16px]">To Date / <span
 				  class="battambang-regular text-[16px]">រហូតដល់ថ្ងៃ</span><span class="text-red-800">**</span></label>
 			  <n-date-picker v-model:value="form.ToDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
 			</div>
-			<div>
-			  <label for="to-time" class="pt-2 text-[16px]">To Time / <span
-				  class="battambang-regular text-[16px]">រហូតដល់ម៉ោង</span><span class="text-red-800">**</span></label>
-			  <n-time-picker v-model:value="form.ToTime" format="h:mm a" class="mt-3" />
-			</div>
-		  </div>
-  
-		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<div>
-			  <label for="back-date" class="pt-2 text-[16px]">Date back to work / <span
-				  class="battambang-regular text-[16px]">ថ្ងៃត្រឡប់មកធ្វើការវិញ</span><span
-				  class="text-red-800">**</span></label>
-			  <n-date-picker v-model:value="form.BackDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
-			</div>
-			<div>
-			  <label for="back-time" class="pt-2 text-[16px]">Time back to work / <span
-				  class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span><span
-				  class="text-red-800">**</span></label>
-			  <n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
-			</div>
-		  </div>
+			
+		  </div>	
 		  <!-- attachment file or image -->
 		  <div class="grid grid-cols-1 gap-4 my-5">
 			<div>
@@ -215,9 +188,9 @@
 	ToTime: null,
 	BackDate: null,
 	BackTime: null,
-	RequestTitleEN: "Annual Leave form",
-	RequestTitleKH: "ពាក្យសុំច្បាប់ឈប់សម្រាកប្រចាំឆ្នាំ",
-	LeaveType: "ឈប់សម្រាកប្រចាំឆ្នាំ/ Annual Leave (បន្ទាប់ពីបានចប់ការសាកល្បងបីខែ)",
+	RequestTitleEN: "Resignation Letter",
+	RequestTitleKH: "លិខិតលាលែងពីការងារ",
+	LeaveType: "លិខិតលាលែងពីការងារ/Resignation Letter",
 	EmployeeID: "",
 	EmployeeName: "",
 	Site: "",
@@ -326,14 +299,11 @@
     "Phone",
     "Gender",
     "LeaveType",
-	"NumberOfDayrequested",
 	"ReasonForLeave",
+	"NumberOfDayrequested",
+	
     "FromDate",
-    "FromTime",
     "ToDate",
-    "ToTime",
-    "BackDate",
-    "BackTime",
     
 ];
   const submitForm = async () => {

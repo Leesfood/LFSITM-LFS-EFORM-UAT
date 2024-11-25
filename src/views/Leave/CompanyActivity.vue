@@ -3,11 +3,8 @@
 		<form @submit.prevent="submitForm">
 			<div class="md:p-6 lg:p-10 shadow dark:border dark:bg-gray-800 dark:border-gray-700">
 				<div>
-
-					<p class=" py-5 text-2xl battambang-regular text-center uppercase  text-black">
-						ចុះបំពេញសកម្មភាពការងារក្រុមហ៊ុននៅខាងក្រៅការិយាល័យ​ <br> Company Activity Request form
-					</p>
-				</div>
+			<div class="py-5 text-2xl battambang-regular text-center uppercase  text-black" v-html="form.RequestTitleKH + '<br>' + form.RequestTitleEN"></div>
+		</div>
 				<div class="  p-4 md:p-6 lg:p-10   ">
 					<!-- Collapsible Employee Information Section -->
 					<div @click="toggleSection"
