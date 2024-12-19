@@ -35,6 +35,12 @@
 
           <span class="mx-4">HR EForm Listing</span>
         </router-link>
+
+        <router-link v-if="allowedRoutes.issueportal" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'Issueportal' ? activeClass : inactiveClass]" to="/issueportal">
+          <i class="fas fa-paper-plane w-5 h-5"></i>
+          <span class="mx-4">IT Support</span>
+        </router-link>
         <router-link v-if="allowedRoutes.resignationForm" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'ResignationForm' ? activeClass : inactiveClass]" to="/resignationForm">
           <i class="fas fa-paper-plane w-5 h-5"></i>
@@ -127,6 +133,7 @@ import { useSidebar } from '../composables/useSidebar'
 
 
 
+
 const { isOpen } = useSidebar()
 const activeClass = ref(
   'bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100',
@@ -147,6 +154,7 @@ const allowedRoutes = computed(() => {
     resignationForm:['2',].includes(userRole),
     myrequest: ['0','1','2'].includes(userRole),
     myassets:['2'].includes(userRole),
+    issueportal:['2'].includes(userRole),
     uiElements: userRole === '2',
     forms: userRole === '2',
     cards: userRole === '2',

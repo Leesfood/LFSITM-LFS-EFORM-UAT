@@ -25,6 +25,9 @@ import Edit from './views/Employees/Edit.vue'
 import MyRequest from './views/MyRequest/MyRequest.vue'
 import MyAssets from './views/MyAssets/MyAssets.vue'
 import ResignationForm from './views/eform/resignationform/ResignationForm.vue'
+import Issueportal from './views/IssuePortal/Issueportal.vue'
+import ITsupport from './views/IssuePortal/ITsupport.vue'
+
 //1' HR role
 //'2' admin
 //'0' users
@@ -40,6 +43,19 @@ const routes: RouteRecordRaw[] = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { roles: ['1', '2','0'] }
+  }
+  ,
+  {
+    path: '/issueportal',
+    name: 'Issueportal',
+    component: Issueportal,
+    meta: { roles: ['2'] }
+  },
+  {
+    path: '/itsupport',
+    name: 'ITSupport',
+    component: ITsupport,
+    meta: { roles: ['2'] }
   },
   {
     path: '/resignationform',

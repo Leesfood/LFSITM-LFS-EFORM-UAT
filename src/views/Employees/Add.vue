@@ -11,56 +11,56 @@
           <!-- Employee ID -->
           <div>
             <label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span
-                class="battambang-regular text-[16px]">លេខសម្គាល់បុគ្គលិក</span></label>
+                class="battambang-regular text-[16px]">លេខសម្គាល់បុគ្គលិក**</span></label>
             <n-input v-model:value="form.employeeid" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Employee Name -->
           <div>
             <label for="employeename" class="pt-2 text-[16px]">Employee Name / <span
-                class="battambang-regular text-[16px]">ឈ្មោះបុគ្គលិក</span></label>
+                class="battambang-regular text-[16px]">ឈ្មោះបុគ្គលិក**</span></label>
             <n-input v-model:value="form.employeename" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Gender -->
           <div>
             <label for="gender" class="pt-2 text-[16px]">Gender / <span
-                class="battambang-regular text-[16px]">ភេទ</span></label>
+                class="battambang-regular text-[16px]">ភេទ**</span></label>
             <n-select v-model:value="form.gender" :options="genderOptions" class="mt-3" />
           </div>
 
           <!-- Phone -->
           <div>
             <label for="phone" class="pt-2 text-[16px]">Phone / <span
-                class="battambang-regular text-[16px]">លេខទូរស័ព្ទ</span></label>
+                class="battambang-regular text-[16px]">លេខទូរស័ព្ទ**</span></label>
             <n-input v-model:value="form.phone" type="text" class="mt-3" />
           </div>
 
           <!-- Email -->
           <div>
             <label for="email" class="pt-2 text-[16px]">Email / <span
-                class="battambang-regular text-[16px]">អ៊ីមែល</span></label>
+                class="battambang-regular text-[16px]">អ៊ីមែល**</span></label>
             <n-input v-model:value="form.email" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Email Approver L1 -->
           <div>
             <label for="emailapproverl1" class="pt-2 text-[16px]">Email Approver L1 / <span
-                class="battambang-regular text-[16px]">អ៊ីមែលអនុម័តលេខ១</span></label>
+                class="battambang-regular text-[16px]">អ៊ីមែលអនុម័តលេខ១**</span></label>
             <n-input v-model:value="form.emailapproverl1" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Email Approver L2 -->
           <div>
             <label for="emailapproverl2" class="pt-2 text-[16px]">Email Approver L2 / <span
-                class="battambang-regular text-[16px]">អ៊ីមែលអនុម័តលេខ២</span></label>
+                class="battambang-regular text-[16px]">អ៊ីមែលអនុម័តលេខ២**</span></label>
             <n-input v-model:value="form.emailapproverl2" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Email Approver L3 -->
           <div>
             <label for="emailapproverl3" class="pt-2 text-[16px]">Email Approver L3 / <span
-                class="battambang-regular text-[16px]">អ៊ីមែលអនុម័តលេខ៣</span></label>
+                class="battambang-regular text-[16px]">អ៊ីមែលអនុម័តលេខ៣**</span></label>
             <n-input v-model:value="form.emailapproverl3" type="text" class="mt-3 font-bold text-black" />
           </div>
 
@@ -77,42 +77,42 @@
           <!-- Acknowledge By -->
           <div>
             <label for="acknowledgeby" class="pt-2 text-[16px]">Acknowledge By / <span
-                class="battambang-regular text-[16px]">អ្នកដែលទទួលស្គាល់</span></label>
+                class="battambang-regular text-[16px]">អ្នកដែលទទួលស្គាល់**</span></label>
             <n-input v-model:value="form.acknowledgeby" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Site -->
           <div>
             <label for="site" class="pt-2 text-[16px]">Site / <span
-                class="battambang-regular text-[16px]">ទីតាំង</span></label>
+                class="battambang-regular text-[16px]">ទីតាំង**</span></label>
             <n-input v-model:value="form.site" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Department -->
           <div>
             <label for="department" class="pt-2 text-[16px]">Department / <span
-                class="battambang-regular text-[16px]">នាយកដ្ឋាន</span></label>
+                class="battambang-regular text-[16px]">នាយកដ្ឋាន**</span></label>
             <n-input v-model:value="form.department" class="mt-3" />
           </div>
 
           <!-- Section -->
           <div>
             <label for="section" class="pt-2 text-[16px]">Section / <span
-                class="battambang-regular text-[16px]">ផ្នែក</span></label>
+                class="battambang-regular text-[16px]">ផ្នែក**</span></label>
             <n-input v-model:value="form.section" class="mt-3" />
           </div>
 
           <!-- Status -->
           <div>
             <label for="status" class="pt-2 text-[16px]">Status / <span
-                class="battambang-regular text-[16px]">ស្ថានភាព</span></label>
+                class="battambang-regular text-[16px]">ស្ថានភាព**</span></label>
             <n-select v-model:value="form.status" :options="statusOptions" class="mt-3" />
           </div>
 
           <!-- Allow Date -->
           <div>
             <label for="allowdate" class="pt-2 text-[16px]">Allow Date / <span
-                class="battambang-regular text-[16px]">កាលបរិច្ឆេទ</span></label>
+                class="battambang-regular text-[16px]">កាលបរិច្ឆេទ**</span></label>
             <n-input v-model:value="form.allowdate" type="text" class="mt-3 font-bold text-black" />
           </div>
         </div>
@@ -161,7 +161,17 @@ const form = ref({
   status: "",
   allowdate: "",
 });
-
+const requiredFields = [
+	"employeeid",
+  "employeename",
+  "gender",
+  "email",
+  "emailapproverl1",
+  "acknowledgeby",
+  "status",
+  "allowdate",
+    
+];
 // Computed property to automatically generate approveremail
 const approveremail = computed(() => {
   const emails = [form.value.emailapproverl1, form.value.emailapproverl2, form.value.emailapproverl3].filter(Boolean);
@@ -190,6 +200,15 @@ onMounted(() => {
 
 const submitForm = async () => {
   try {
+    for (const field of requiredFields) {
+    if (!form.value[field]) {
+        Swal.fire("បរាជ័យ", "ត្រូវបំពេញព័ត៌មាន " +field, "error");
+        return;
+    }
+	}
+
+
+
     showModal.value = true;
     loadingBar.start();
 
