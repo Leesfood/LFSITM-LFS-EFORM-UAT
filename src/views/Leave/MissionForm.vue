@@ -433,12 +433,17 @@ const submitForm = async () => {
 			const response = await axios.post(`https://prod-18.southeastasia.logic.azure.com/workflows/70cdee3d71174907ab7e079877c5e8ec/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QBaD-PHa4UT8IOy5nHGi5gyvbORVZrNeNTtv0X5LZTc`, payload);
 
 			if (response.data.status === 'Sucessfully') {
-				Swal.fire("Success", "ការស្នើរសុំរបស់អ្នកទទួលបានជោគជ័យ!", "success").then(() => {
-					router.push({ name: '/home' });
-				});
-			} else {
-				Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
-			}
+		  Swal.fire("Success", "ការស្នើរសុំរបស់អ្នកទទួលបានជោគជ័យ!", "success").then(() => {
+			router.push({ name: '/home' });
+		  });
+		} else {
+		if(response.data.status === 'duplicate'){
+			Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ ដោយសារធ្លាប់ស្នើរសុំម្ដងរូចហើយ", "error");
+		}else{
+			Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
+		}
+		  
+		}
 
 			employeeId.value = null;
 			uploadKey.value = Date.now();
