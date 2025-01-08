@@ -405,7 +405,12 @@
 			router.push({ name: '/home' });
 		  });
 		} else {
-		  Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
+		if(response.data.status === 'duplicate'){
+			Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ,ដោយសារធ្លាបើស្នើរសុំម្ដងរូចហើយ", "error");
+		}else{
+			Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
+		}
+		  
 		}
   
 		employeeId.value = null;
