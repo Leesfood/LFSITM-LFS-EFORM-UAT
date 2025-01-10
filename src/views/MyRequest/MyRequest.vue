@@ -5,10 +5,10 @@
       <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 mb-4">
     <div class="bg-gradient-to-r from-green-400 to-green-300 p-6 rounded-lg shadow-lg w-full transition-transform transform hover:scale-105">
         <h3 class="text-2xl font-bold text-blue-900 text-center">Leave Balances:</h3>
-        <p class="text-lg text-gray-700 mt-2 text-left">Annual Leave (AL): 0 days</p>
-        <p class="text-lg text-gray-700 text-left">Sick Leave (SL): 0 days</p>
-        <p class="text-lg text-gray-700 text-left">Special Leave (SPL): 0 days</p>
-        <p class="text-lg text-gray-700 text-left">Maternity Leave (ML): 0 days</p>
+        <p class="text-lg text-gray-700 mt-2 text-left">Annual Leave (AL): {{ employeeProfileData?.albalance}}/{{ employeeProfileData?.annualleave }} days</p> 
+        <p class="text-lg text-gray-700 text-left">Sick Leave (SL): {{ employeeProfileData?.slbalance}}/{{ employeeProfileData?.sickleave }} days</p>
+        <!-- <p class="text-lg text-gray-700 text-left">Special Leave (SPL): 0 days</p>
+        <p class="text-lg text-gray-700 text-left">Maternity Leave (ML): 0 days</p> -->
     </div>
     <div class="bg-gradient-to-r from-yellow-300 to-yellow-200 p-6 rounded-lg shadow-lg w-full text-center transition-transform transform hover:scale-105">
         <h3 class="text-2xl font-bold text-green-900">Your Requested:</h3>
@@ -41,6 +41,7 @@
             <tr class="w-full text-sm leading-none text-blue bg-gray-200 border-b border-gray-200 whitespace-nowrap">
                 <th class="font-normal py-2 text-center border-r border-gray-300">No</th>
                 <th class="font-normal py-4 px-4 text-left border-r border-gray-300 hidden md:table-cell">Request Type</th>
+                <th class="font-normal py-4 text-left px-4 border-r border-gray-300">#Requested</th>
                 <th class="font-normal py-4 text-left px-4 border-r border-gray-300">From Date</th>
                 <th class="font-normal py-4 text-left px-4 border-r border-gray-300">To Date</th>
                 <th class="font-normal text-left px-4 border-r border-gray-300">Reason for leave</th>
@@ -56,6 +57,7 @@
             <tr v-for="(requestlist, index) in paginatedMyrequestlist" :key="index" :class="['text-sm leading-none border-b border-gray-200 whitespace-nowrap']">
                 <td class="text-center border-r border-gray-200 py-2">{{ index + 1 }}</td>
                 <td class="px-4 py-2 text-left border-r border-gray-200 hidden md:table-cell">{{ requestlist.RequestType }}</td>
+                <td class="font-normal py-4 text-left px-4 border-r border-gray-300">{{ requestlist.NumberOfdaysRequested }}</td>
                 <td class="px-4 py-2 text-left border-r border-gray-200">{{ requestlist.FromDate }}</td>
                 <td class="px-4 py-2 text-left border-r border-gray-200">{{ requestlist.ToDate }}</td>
                 <td class="px-4 py-2 text-left border-r border-gray-200">{{ requestlist.LeaveReason}}</td>
@@ -148,9 +150,12 @@ interface EmployeeProfileData {
     Status: string;
     allowdate: string;
     gender: string;
-    balanceal: string;
     Phone: string;
     role: string;
+    annualleave:string;
+    sickleave:string;
+    albalance:string;
+    slbalance:string;
 }
 
 const employeeProfileData = ref<EmployeeProfileData | null>(null);

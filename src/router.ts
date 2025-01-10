@@ -27,6 +27,8 @@ import MyAssets from './views/MyAssets/MyAssets.vue'
 import ResignationForm from './views/eform/resignationform/ResignationForm.vue'
 import Issueportal from './views/IssuePortal/Issueportal.vue'
 import ITsupport from './views/IssuePortal/ITsupport.vue'
+import HRRequestItems from './views/HRRequestitemsform/HRRequestItemsList.vue'
+import Gasolinecard from './views/HRRequestitemsform/gasolinecard.vue'
 
 //1' HR role
 //'2' admin
@@ -43,6 +45,18 @@ const routes: RouteRecordRaw[] = [
     name: 'Dashboard',
     component: Dashboard,
     meta: { roles: ['1', '2','0'] }
+  },
+  {
+    path: '/hrrequestitems',
+    name: 'HRRequestItems',
+    component: HRRequestItems,
+    meta: { roles: ['2'] }
+  },
+  {
+    path: '/gasolinecard',
+    name: 'gasolinecard',
+    component: Gasolinecard,
+    meta: { roles: ['2'] }
   }
   ,
   {

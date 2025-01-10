@@ -84,6 +84,23 @@
                         <p class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Allow Date</p>
                         <p class="text-lg font-semibold hover:text-blue-500">{{ employee.allowdate || 'Not available' }}</p>
                     </div>
+                    <div class="flex flex-col pt-3">
+                        <p class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Balance AL / <span class="battambang-regular text-[16px]">ឈប់សម្រាកប្រចាំឆ្នាំ</span></p>
+                        <p class="text-lg font-semibold hover:text-blue-500">{{ employee.annualleave || 'Not available' }}</p>
+                    </div>
+                    <div class="flex flex-col pt-3">
+                        <p class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Remaining AL/ <span class="battambang-regular text-[16px]">ឈប់សម្រាកប្រចាំឆ្នាំនៅសល់</span></p>
+                        <p class="text-lg font-semibold hover:text-blue-500">{{ employee.albalance || 'Not available' }}</p>
+                    </div>
+                    <div class="flex flex-col pt-3">
+                        <p class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Balance SL/ <span class="battambang-regular text-[16px]">ឈប់សម្រាកឈប់ដោយជំងឺ</span></p>
+                        <p class="text-lg font-semibold hover:text-blue-500">{{ employee.sickleave || 'Not available' }}</p>
+                    </div>
+                    <div class="flex flex-col pt-3">
+                        <p class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Remaining SL <span class="battambang-regular text-[16px]">ឈប់សម្រាកឈប់ដោយជំងឺនៅសល់</span></p>
+                        <p class="text-lg font-semibold hover:text-blue-500">{{ employee.slbalance || 'Not available' }}</p>
+                    </div>
+
                 </div>
             </div>
         </div>

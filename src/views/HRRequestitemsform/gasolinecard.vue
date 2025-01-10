@@ -98,62 +98,28 @@
 			class="overflow-hidden p-4 mb-4 bg-white transition-all duration-200 ease-in-out transform scale-100 grid grid-cols-1 gap-4 shadow-inner border border-gray-200">
   
 		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<!-- Number of Days Requested -->
+			<!-- Issue Type -->
 			<div>
-			  <label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span
-				  class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span><span
-				  class="text-red-800">**</span></label>
-			  <!-- <n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" /> -->
-			  <n-select v-model:value="form.NumberOfDayrequested" :options="NumberOfDayrequested" class="mt-3" />
-			</div>
-			<!-- Reason for Leave -->
-			<div>
-			  <label for="reason-for-leave" class="pt-2 text-[16px] ">Reason for Leave / <span
-				  class="battambang-regular text-[16px]">មូលហេតុនៃការសុំ</span><span
-				  class="text-red-800">**</span></label>
-			  <n-input v-model:value="form.ReasonForLeave" type="textarea" class="mt-3" />
-			</div>
-  
+            <label for="gender" class="pt-2 text-[16px]">Issue Type / <span
+                class="battambang-regular text-[16px]">ប្រភេទបញ្ហា</span><span
+				class="text-red-800">**</span></label>
+            <n-select v-model:value="form.IssueOptions" :options="issueOptions" class="mt-3" />
+          </div>
+          <!-- Priority-->
+          <div>
+            <label for="gender" class="pt-2 text-[16px]">Priority / <span
+                class="battambang-regular text-[16px]">អាទិភាព</span><span
+				class="text-red-800">**</span></label>
+            <n-select v-model:value="form.PriorityOptions" :options="priorityOptions" class="mt-3" />
+          </div>
 		  </div>
-		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<!-- Date and Time Fields -->
-			<div>
-			  <label for="from-date" class="pt-2 text-[16px]">From Date / <span
-				  class="battambang-regular text-[16px]">ចាប់ពីថ្ងៃ</span><span class="text-red-800">**</span></label>
-			  <n-date-picker v-model:value="form.FromDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
-			</div>
-			<div>
-			  <label for="from-time" class="pt-2 text-[16px]">From Time / <span
-				  class="battambang-regular text-[16px]">ចាប់ពីម៉ោង</span><span class="text-red-800">**</span></label>
-			  <n-time-picker v-model:value="form.FromTime" format="h:mm a" class="mt-3" />
-			</div>
-		  </div>
-  
-		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<div>
-			  <label for="to-date" class="pt-2 text-[16px]">To Date / <span
-				  class="battambang-regular text-[16px]">រហូតដល់ថ្ងៃ</span><span class="text-red-800">**</span></label>
-			  <n-date-picker v-model:value="form.ToDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
-			</div>
-			<div>
-			  <label for="to-time" class="pt-2 text-[16px]">To Time / <span
-				  class="battambang-regular text-[16px]">រហូតដល់ម៉ោង</span><span class="text-red-800">**</span></label>
-			  <n-time-picker v-model:value="form.ToTime" format="h:mm a" class="mt-3" />
-			</div>
-		  </div>
-  
-		  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-			<div>
-			  <label for="back-date" class="pt-2 text-[16px]">Date back to work / <span
-				  class="battambang-regular text-[16px]">ថ្ងៃត្រឡប់មកធ្វើការវិញ</span><span
+		  <div class="grid grid-cols-1 gap-4 my-5">
+<!-- Reason for Leave -->
+<div>
+			  <label for="reason-for-leave" class="pt-2 text-[16px] ">Issue description / <span
+				  class="battambang-regular text-[16px]">បរិយាសអំពីបញ្ហាជួបប្រទះ</span><span
 				  class="text-red-800">**</span></label>
-			  <n-date-picker v-model:value="form.BackDate" type="date" class="mt-3" :is-date-disabled="dateDisabled" />
-			</div>
-			<div>
-			  <label for="back-time" class="pt-2 text-[16px]">Time back to work / <span
-				  class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span><span
-				  class="text-red-800">**</span></label>
-			  <n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
+			  <n-input v-model:value="form.Issuedescription" type="textarea" class="mt-3" />
 			</div>
 		  </div>
 		  <!-- attachment file or image -->
@@ -196,29 +162,25 @@
   import { format, subDays } from "date-fns";
   import { useLoadingBar } from 'naive-ui';
   import { NSpin } from 'naive-ui';
-  import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
+  import { ArchiveOutline as ArchiveIcon, Today } from '@vicons/ionicons5';
   import { useRouter } from 'vue-router';
-  const showSection = ref(true);  // Controls visibility of Employee Information section
+  const showSection = ref(false);  // Controls visibility of Employee Information section
   
   const toggleSection = () => {
 	showSection.value = !showSection.value;
   };
   const form = ref({
 	ReasonForLeave: "",
-	NumberOfDayrequested: "",
 	Phone: "",
 	Email: "",
 	EmailApprover:"",
 	Gender: "",
-	FromDate: null,
-	FromTime: null,
-	ToDate: null,
-	ToTime: null,
-	BackDate: null,
-	BackTime: null,
-	RequestTitleEN: "Annual Leave form",
-	RequestTitleKH: "ពាក្យសុំច្បាប់ឈប់សម្រាកប្រចាំឆ្នាំ",
-	LeaveType: "ឈប់សម្រាកប្រចាំឆ្នាំ/ Annual Leave (បន្ទាប់ពីបានចប់ការសាកល្បងបីខែ)",
+	PriorityOptions:[],
+	IssueOptions:[],
+	Issuedescription:null,
+	RequestTitleEN: "Gasoline Card",
+	RequestTitleKH: "ស្នើរសុំកាតសាំង",
+	LeaveType: "ស្នើរសុំកាតសាំង/GasolineCard",
 	EmployeeID: "",
 	EmployeeName: "",
 	Site: "",
@@ -233,24 +195,21 @@
   const employeeId = ref(null);
   const uploadKey = ref(Date.now());
   const router = useRouter();
-  const NumberOfDayrequested = ref([
-	{ label: '0.5 ថ្ងៃ/Day', value: '0.5' },
-	{ label: '1 ថ្ងៃ/Day', value: '1' },
-	{ label: '1.5 ថ្ងៃ/Day', value: '1.5' },
-	{ label: '2 ថ្ងៃ/Day', value: '2' },
-	{ label: '2.5 ថ្ងៃ/Day', value: '2.5' },
-	{ label: '3 ថ្ងៃ/Day', value: '3' },
-	{ label: '3.5 ថ្ងៃ/Day', value: '3.5' },
-	{ label: '4 ថ្ងៃ/Day', value: '4' },
-	{ label: '4.5 ថ្ងៃ/Day', value: '4.5' },
-	{ label: '5 ថ្ងៃ/Day', value: '5' },
-	{ label: '5.5 ថ្ងៃ/Day', value: '5.5' },
-	{ label: '6 ថ្ងៃ/Day', value: '6' },
-	{ label: '6.5 ថ្ងៃ/Day', value: '6.5' },
-	{ label: '7 ថ្ងៃ/Day', value: '7' },
+  const priorityOptions = ref([
+	{ label: 'Critical', value: 'Critical' },
+	{ label: 'High', value: 'High' },
+	{ label: 'Normal', value: 'Normal' },
+	{ label: 'Low', value: 'Female' },
 
   ]);
-  
+  const issueOptions = ref([
+	{ label: 'Hardware', value: 'Hardware' },
+	{ label: 'Software', value: 'Software' },
+	{ label: 'License', value: 'License' },
+	{ label: 'Email', value: 'Email' },
+
+  ]);
+
   const minSelectableDate = ref(null);
   
   onMounted(async () => {
@@ -340,14 +299,7 @@
     "Phone",
     "Gender",
     "LeaveType",
-	"NumberOfDayrequested",
-	"ReasonForLeave",
-    "FromDate",
-    "FromTime",
-    "ToDate",
-    "ToTime",
-    "BackDate",
-    "BackTime",
+	"Issuedescription",
     
 ];
   const submitForm = async () => {
@@ -363,11 +315,7 @@
 		  <p class="p-custom"><span class="custom-width">ឈ្មោះបុគ្គលិក:</span><span class="custom-span">${form.value.EmployeeName}(${form.value.EmployeeID})</span></p> 
 		  <p class="p-custom"><span class="custom-width">អ៊ីមែល:</span><span class="custom-span">${form.value.Email}</span></p>
 		  <p class="p-custom"><span class="custom-width">អ្នកអនុញ្ញាត(Approver):</span><span class="custom-span">${form.value.EmailApprover}</span></p>
-		  <p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.ReasonForLeave}</span></p>
-		  <p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested}</span></p>
-		  <p class="p-custom"><span class="custom-width">ចាប់ពីថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.FromDate, form.value.FromTime)}</span></p>
-		  <p class="p-custom"><span class="custom-width">រហូតដល់ថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.ToDate, form.value.ToTime)}</span></p>
-		  <p class="p-custom"><span class="custom-width">ថ្ងៃត្រឡប់មកធ្វើការវិញ:</span><span class="custom-span">${formatDateWithTime(form.value.BackDate, form.value.BackTime)}</span></p> 
+		  <p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.Issuedescription}</span></p>
 		  </div>`;
   
 	const { isConfirmed } = await Swal.fire({
@@ -385,7 +333,7 @@
 	  loadingBar.start();
 	  try {
 		const payload = {
-		  RequestType: "LIVE",
+		  Issue: "ITSupport",
 		  EmployeeID: form.value.EmployeeID,
 		  EmployeeName: form.value.EmployeeName,
 		  EmailRequestor: form.value.Email,
@@ -396,35 +344,25 @@
 		  RequestTitleEN: form.value.RequestTitleEN,
 		  RequestTitleKH: form.value.RequestTitleKH,
 		  LeaveType: form.value.LeaveType,
-		  ReasonForLeave: form.value.ReasonForLeave,
-		  NumberOfDayrequested: form.value.NumberOfDayrequested,
+		  Issuedescription: form.value.Issuedescription,
+		  Priority:form.value.PriorityOptions,
 		  Phone: form.value.Phone,
-		  FromDate: formatDateWithTime(form.value.FromDate, form.value.FromTime),
-		  FromTime: format(form.value.FromTime, 'hh:mm a'),
-		  ToDate: formatDateWithTime(form.value.ToDate, form.value.ToTime),
-		  ToTime: format(form.value.ToTime, 'hh:mm a'),
-		  BackDate: formatDateWithTime(form.value.BackDate, form.value.BackTime),
-		  BackTime: format(form.value.BackTime, 'hh:mm a'),
 		  EmailApprover: form.value.EmailApprover,
 		  EmailAcknowledge: form.value.EmailAcknowledge,
 		  Attachements: JSON.stringify(form.value.Attachements),
 		  telegramchatid: form.value.telegramchatid,
 		  telegramchatidApprover: form.value.telegramchatidApprover,
+		  Requesteddate:form.value.Requesteddate
 		};
   
-		const response = await axios.post(`https://prod-18.southeastasia.logic.azure.com/workflows/70cdee3d71174907ab7e079877c5e8ec/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QBaD-PHa4UT8IOy5nHGi5gyvbORVZrNeNTtv0X5LZTc`, payload);
+		const response = await axios.post(`https://prod-29.southeastasia.logic.azure.com:443/workflows/23d7d91ffd3743d5bc45fae66f7ac9f3/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=NmdDOGa5Q8T36F5mjyzl6fsKs5IOzu2FpFIwXKJEH2g`, payload);
   
 		if (response.data.status === 'Sucessfully') {
 		  Swal.fire("Success", "ការស្នើរសុំរបស់អ្នកទទួលបានជោគជ័យ!", "success").then(() => {
 			router.push({ name: '/home' });
 		  });
 		} else {
-		if(response.data.status === 'duplicate'){
-			Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ ដោយសារធ្លាប់ស្នើរសុំម្ដងរូចហើយ", "error");
-		}else{
-			Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
-		}
-		  
+		  Swal.fire("Error", "ការស្នើរសុំរបស់អ្នកបរាជ័យ", "error");
 		}
   
 		employeeId.value = null;

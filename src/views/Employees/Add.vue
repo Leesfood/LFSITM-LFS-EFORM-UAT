@@ -115,6 +115,27 @@
                 class="battambang-regular text-[16px]">កាលបរិច្ឆេទ**</span></label>
             <n-input v-model:value="form.allowdate" type="text" class="mt-3 font-bold text-black" />
           </div>
+           <!-- AnnualLeave -->
+           <div>
+                        <label for="allowdate" class="pt-2 text-[16px]">Balance Annual Leave / <span class="battambang-regular text-[16px]">ឈប់សម្រាកប្រចាំឆ្នាំ</span></label>
+                        <n-input v-model:value="form.annualleave" type="text" class="mt-3 font-bold text-black" />
+                    </div>
+                    <!-- AnnualLeave -->
+                    <div>
+                        <label for="allowdate" class="pt-2 text-[16px]">Remaining Annual Leave / <span class="battambang-regular text-[16px]">ឈប់សម្រាកប្រចាំឆ្នាំនៅសល់</span></label>
+                        <n-input v-model:value="form.albalance" type="text" class="mt-3 font-bold text-black" />
+                    </div>
+                    <!-- SickLeave -->
+                    <div>
+                        <label for="allowdate" class="pt-2 text-[16px]">Balance Sick Leave/ <span class="battambang-regular text-[16px]">ឈប់សម្រាកឈប់ដោយជំងឺ</span></label>
+                        <n-input v-model:value="form.sickleave" type="text" class="mt-3 font-bold text-black" />
+                    </div>
+                    <!-- SickLeave -->
+                    <div>
+                        <label for="allowdate" class="pt-2 text-[16px]">Remaining Sick Leave/ <span class="battambang-regular text-[16px]">ឈប់សម្រាកឈប់ដោយជំងឺនៅសល់</span></label>
+                        <n-input v-model:value="form.slbalance" type="text" class="mt-3 font-bold text-black" />
+                    </div>
+
         </div>
 
         <div class="grid grid-cols-1 gap-4 my-5">
@@ -160,9 +181,13 @@ const form = ref({
   section: "",
   status: "",
   allowdate: "",
+  annualleave:"0",
+  albalance:"0",
+  sickleave:"0",
+  slbalance:"0"
 });
 const requiredFields = [
-	"employeeid",
+  "employeeid",
   "employeename",
   "gender",
   "email",
@@ -170,7 +195,7 @@ const requiredFields = [
   "acknowledgeby",
   "status",
   "allowdate",
-    
+
 ];
 // Computed property to automatically generate approveremail
 const approveremail = computed(() => {
@@ -201,11 +226,11 @@ onMounted(() => {
 const submitForm = async () => {
   try {
     for (const field of requiredFields) {
-    if (!form.value[field]) {
-        Swal.fire("បរាជ័យ", "ត្រូវបំពេញព័ត៌មាន " +field, "error");
+      if (!form.value[field]) {
+        Swal.fire("បរាជ័យ", "ត្រូវបំពេញព័ត៌មាន " + field, "error");
         return;
+      }
     }
-	}
 
 
 
@@ -230,6 +255,10 @@ const submitForm = async () => {
       section: form.value.section,
       status: form.value.status,
       allowdate: form.value.allowdate,
+      annualleave:form.value.annualleave,
+      albalance:form.value.albalance,
+      sickleave:form.value.sickleave,
+      slbalance:form.value.slbalance,
     };
 
     const response = await axios.post(

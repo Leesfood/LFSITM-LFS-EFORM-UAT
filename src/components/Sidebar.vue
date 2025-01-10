@@ -35,7 +35,11 @@
 
           <span class="mx-4">HR EForm Listing</span>
         </router-link>
-
+        <router-link v-if="allowedRoutes.hrrequestitems" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'HRRequestItems' ? activeClass : inactiveClass]" to="/hrrequestitems">
+          <i class="fas fa-paper-plane w-5 h-5"></i>
+          <span class="mx-4">HR Request items form</span>
+        </router-link>
         <router-link v-if="allowedRoutes.issueportal" class="flex text-white items-center px-6 py-2 mt-4 duration-200 border-l-4"
           :class="[$route.name === 'Issueportal' ? activeClass : inactiveClass]" to="/issueportal">
           <i class="fas fa-paper-plane w-5 h-5"></i>
@@ -150,6 +154,7 @@ const userRole = localStorage.getItem('userRole') || '0';
 const allowedRoutes = computed(() => {
   return {
     dashboard: true, // accessible to everyone
+    hrrequestitems:['2'].includes(userRole),
     employee: ['1', '2'].includes(userRole), // only visible for roles 1 and 2
     resignationForm:['2',].includes(userRole),
     myrequest: ['0','1','2'].includes(userRole),

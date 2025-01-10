@@ -110,7 +110,8 @@
 						<label for="number-of-days-requested" class="pt-2 text-[16px]">Number of Requested / <span
 								class="battambang-regular text-[16px]">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង)</span><span
 								class="text-red-800">**</span></label>
-						<n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" />
+						<!-- <n-input v-model:value="form.NumberOfDayrequested" type="text" class="mt-3" /> -->
+						<n-select v-model:value="form.NumberOfDayrequested" :options="NumberOfDayrequested" class="mt-3" />
 					</div>
 
 					<!-- Reason for Leave -->
@@ -245,6 +246,22 @@ const form = ref({
 	telegramchatidApprover: "",
 	allowdate: "1", // Default allow date, assuming it's fetched later
 });
+const NumberOfDayrequested = ref([
+	{ label: '0.5 ថ្ងៃ/Day', value: '0.5' },
+	{ label: '1 ថ្ងៃ/Day', value: '1' },
+	{ label: '1.5 ថ្ងៃ/Day', value: '1.5' },
+	{ label: '2 ថ្ងៃ/Day', value: '2' },
+	{ label: '2.5 ថ្ងៃ/Day', value: '2.5' },
+	{ label: '3 ថ្ងៃ/Day', value: '3' },
+	{ label: '3.5 ថ្ងៃ/Day', value: '3.5' },
+	{ label: '4 ថ្ងៃ/Day', value: '4' },
+	{ label: '4.5 ថ្ងៃ/Day', value: '4.5' },
+	{ label: '5 ថ្ងៃ/Day', value: '5' },
+	{ label: '5.5 ថ្ងៃ/Day', value: '5.5' },
+	{ label: '6 ថ្ងៃ/Day', value: '6' },
+	{ label: '6.5 ថ្ងៃ/Day', value: '6.5' },
+	{ label: '7 ថ្ងៃ/Day', value: '7' },
+  ]);
 
 const employeeId = ref(null);
 const uploadKey = ref(Date.now());
