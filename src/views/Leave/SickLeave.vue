@@ -386,7 +386,7 @@ const submitForm = async () => {
 		<p class="p-custom"><span class="custom-width">អ៊ីមែល:</span><span class="custom-span">${form.value.Email}</span></p>
 		<p class="p-custom"><span class="custom-width">អ្នកអនុញ្ញាត(Approver):</span><span class="custom-span">${form.value.EmailApprover}</span></p>
 		<p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.ReasonForLeave}</span></p>
-		<p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested}</span></p>
+		<p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested}​ ថ្ងៃ/Days</span></p>
 		<p class="p-custom"><span class="custom-width">ចាប់ពីថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.FromDate, form.value.FromTime)}</span></p>
 		<p class="p-custom"><span class="custom-width">រហូតដល់ថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.ToDate, form.value.ToTime)}</span></p>
 		<p class="p-custom"><span class="custom-width">ថ្ងៃត្រឡប់មកធ្វើការវិញ:</span><span class="custom-span">${formatDateWithTime(form.value.BackDate, form.value.BackTime)}</span></p> 

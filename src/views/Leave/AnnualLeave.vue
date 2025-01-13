@@ -156,6 +156,21 @@
 			  <n-time-picker v-model:value="form.BackTime" format="h:mm a" class="mt-3" />
 			</div>
 		  </div>
+		  <!-- Balance AL  -->
+		  <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+			<div>
+			  <label for="back-date" class="pt-2 text-[16px]">alremaining / <span
+				  class="battambang-regular text-[16px]"></span><span
+				  class="text-red-800">**</span></label>
+			  <n-input v-model:value="form.alremaining" type="text" class="mt-3"  />
+			</div>
+			<div>
+			  <label for="back-time" class="pt-2 text-[16px]">annualleave / <span
+				  class="battambang-regular text-[16px]">ម៉ោងត្រឡប់មកធ្វើការវិញ</span><span
+				  class="text-red-800">**</span></label>
+			  <n-input v-model:value="form.albalance" type="text" class="mt-3"  />
+			</div>
+		  </div> -->
 		  <!-- attachment file or image -->
 		  <div class="grid grid-cols-1 gap-4 my-5">
 			<div>
@@ -190,7 +205,7 @@
   </template>
   
   <script setup>
-  import { ref, onMounted, computed } from 'vue';
+  import { ref, onMounted, computed ,watch } from 'vue';
   import axios from "axios";
   import Swal from "sweetalert2";
   import { format, subDays } from "date-fns";
@@ -228,6 +243,10 @@
 	telegramchatid: "",
 	telegramchatidApprover: "",
 	allowdate: "1", // Default allow date, assuming it's fetched later
+	annualleave:"0",
+    albalance:"0",
+	alremaining:"0",
+
   });
   
   const employeeId = ref(null);
@@ -251,6 +270,15 @@
 
   ]);
   
+// Calculcate balannce 
+//   watch(
+//   () => form.value.NumberOfDayrequested,
+//   (newVal) => {
+// 	const alremainingbalance = parseFloat(form.value.albalance|| "0");
+// 	const requestedDays = parseFloat(newVal || "0");
+//     form.value.alremaining = (alremainingbalance - requestedDays).toFixed(2);
+//   }
+// );
   const minSelectableDate = ref(null);
   
   onMounted(async () => {
@@ -265,7 +293,8 @@
 	  form.value.Position = employeeData.Section;
 	  form.value.Site = employeeData.Site;
 	  form.value.EmailAcknowledge = employeeData.aknowledgeby;
-  
+	  form.value.annualleave=employeeData.annualleave;
+	  form.value.albalance=employeeData.albalance
 	  // Check for empty or null values and provide default if necessary
 	  form.value.Phone = employeeData.Phone || "N/A";  // Default to "N/A" if Phone is empty
 	  form.value.Gender = employeeData.gender || "Not Specified";  // Default to "Not Specified" if Gender is empty
@@ -358,13 +387,18 @@
         return;
     }
 	}
+	// if(parseFloat(form.value.alremaining|| "0")<0){
+	// 	Swal.fire("បរាជ័យ", "លោកអ្នកមិនមានច្បាប់ សម្រាប់ស្នើសុំឡើយ", "error");
+	// 	return;
+	// }
+
 	const confirmMessage = `
 		  <div style="text-align: left;">
 		  <p class="p-custom"><span class="custom-width">ឈ្មោះបុគ្គលិក:</span><span class="custom-span">${form.value.EmployeeName}(${form.value.EmployeeID})</span></p> 
 		  <p class="p-custom"><span class="custom-width">អ៊ីមែល:</span><span class="custom-span">${form.value.Email}</span></p>
 		  <p class="p-custom"><span class="custom-width">អ្នកអនុញ្ញាត(Approver):</span><span class="custom-span">${form.value.EmailApprover}</span></p>
 		  <p class="p-custom"><span class="custom-width">មូលហេតុនៃការសុំ:</span><span class="custom-span">${form.value.ReasonForLeave}</span></p>
-		  <p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested}</span></p>
+		  <p class="p-custom"><span class="custom-width">ចំនូនដែលស្នើសុំ​ (ថ្ងៃ/ម៉ោង):</span><span class="custom-span">${form.value.NumberOfDayrequested} ថ្ងៃ/Days</span></p>
 		  <p class="p-custom"><span class="custom-width">ចាប់ពីថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.FromDate, form.value.FromTime)}</span></p>
 		  <p class="p-custom"><span class="custom-width">រហូតដល់ថ្ងៃ:</span><span class="custom-span">${formatDateWithTime(form.value.ToDate, form.value.ToTime)}</span></p>
 		  <p class="p-custom"><span class="custom-width">ថ្ងៃត្រឡប់មកធ្វើការវិញ:</span><span class="custom-span">${formatDateWithTime(form.value.BackDate, form.value.BackTime)}</span></p> 

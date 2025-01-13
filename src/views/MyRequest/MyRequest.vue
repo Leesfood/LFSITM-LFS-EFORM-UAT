@@ -3,13 +3,13 @@
     <div class="w-full">
       <!-- New Boxes Section -->
       <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 mb-4">
-    <div class="bg-gradient-to-r from-green-400 to-green-300 p-6 rounded-lg shadow-lg w-full transition-transform transform hover:scale-105">
+    <!-- <div class="bg-gradient-to-r from-green-400 to-green-300 p-6 rounded-lg shadow-lg w-full transition-transform transform hover:scale-105">
         <h3 class="text-2xl font-bold text-blue-900 text-center">Leave Balances:</h3>
         <p class="text-lg text-gray-700 mt-2 text-left">Annual Leave (AL): {{ employeeProfileData?.albalance}}/{{ employeeProfileData?.annualleave }} days</p> 
-        <p class="text-lg text-gray-700 text-left">Sick Leave (SL): {{ employeeProfileData?.slbalance}}/{{ employeeProfileData?.sickleave }} days</p>
-        <!-- <p class="text-lg text-gray-700 text-left">Special Leave (SPL): 0 days</p>
-        <p class="text-lg text-gray-700 text-left">Maternity Leave (ML): 0 days</p> -->
-    </div>
+        <p class="text-lg text-gray-700 text-left">Sick Leave (SL): {{ employeeProfileData?.slbalance}}/{{ employeeProfileData?.sickleave }} days</p> 
+        <p class="text-lg text-gray-700 text-left">Special Leave (SPL): 0 days</p>
+        <p class="text-lg text-gray-700 text-left">Maternity Leave (ML): 0 days</p>
+    </div> -->
     <div class="bg-gradient-to-r from-yellow-300 to-yellow-200 p-6 rounded-lg shadow-lg w-full text-center transition-transform transform hover:scale-105">
         <h3 class="text-2xl font-bold text-green-900">Your Requested:</h3>
         <p class="text-lg text-gray-700 mt-2 text-left">Pending : {{ pendingCount }} Requests</p>

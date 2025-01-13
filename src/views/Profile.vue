@@ -46,11 +46,11 @@
                                     <p class="text-gray-500">Email</p>
                                     <p class="font-semibold ml-2">{{ employeeData.Email || 'Not available' }}</p>
                                 </div>
-                                <div class="flex justify-start">
+                                <div class="flex justify-start" v-show="false">
                                     <p class="text-gray-500">Annual Leave Balance</p>
                                     <p class="font-semibold ml-2">{{employeeData.albalance || 'Not available' }}/{{employeeData.annualleave || 'Not available' }} days</p>
                                 </div>
-                                <div class="flex justify-start">
+                                <div class="flex justify-start" v-show="false">
                                     <p class="text-gray-500">Sick Leave Balance</p>
                                     <p class="font-semibold ml-2">{{ employeeData.slbalance || 'Not available' }}/{{ employeeData.sickleave || 'Not available' }} days</p>
                                 </div>
