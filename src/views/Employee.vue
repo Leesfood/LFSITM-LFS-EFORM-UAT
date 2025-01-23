@@ -211,12 +211,15 @@ async function getAllEmployees() {
       filteredEmployees.value = employeesList;
       // Store data in local storage
       localStorage.setItem('employees', JSON.stringify(employeesList));
-      console.log('Stored employees data in local storage:', employeesList);
+      //console.log('Stored employees data in local storage:', response);
     } else {
+     
       console.error('Error: response.data.data is undefined');
     }
   } catch (error) {
+  
     console.error('Error fetching employee data:', error);
+    
   } finally {
     loadingBar.finish();
   }
