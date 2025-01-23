@@ -19,7 +19,7 @@
           <div>
             <label for="employeename" class="pt-2 text-[16px]">Employee Name / <span
                 class="battambang-regular text-[16px]">ឈ្មោះបុគ្គលិក**</span></label>
-            <n-input v-model:value="form.employeename" @input="form.employeename= form.employeename.trim()" type="text" class="mt-3 font-bold text-black" />
+            <n-input v-model:value="form.employeename" @input="form.employeename=ltrim(form.employeename)" type="text" class="mt-3 font-bold text-black" />
           </div>
 
           <!-- Gender -->
@@ -202,6 +202,13 @@ const approveremail = computed(() => {
   const emails = [form.value.emailapproverl1, form.value.emailapproverl2, form.value.emailapproverl3].filter(Boolean);
   return emails.join(';');
 });
+function ltrim(value) {
+  return value.replace(/^\s+/, ''); // Removes leading spaces
+}
+
+function rtrim(value) {
+  return value.replace(/\s+$/, ''); // Removes trailing spaces
+}
 
 const router = useRouter();
 const statusOptions = ref([
@@ -241,7 +248,7 @@ const submitForm = async () => {
       RequestType: "Add",
       ModifiedBy: form.value.ModifiedBy,
       employeeid: form.value.employeeid,
-      employeename: form.value.employeename,
+      employeename:rtrim(form.value.employeename),
       gender: form.value.gender,
       phone: form.value.phone,
       email: form.value.email,
