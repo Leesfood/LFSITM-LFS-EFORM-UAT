@@ -9,9 +9,13 @@
             <div class="p-4 md:p-6 lg:p-10">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <!-- Employee ID -->
+                    <div v-show="false">
+                        <label for="userid" class="pt-2 text-[16px]">ID / <span class="battambang-regular text-[16px]">លេខ</span></label>
+                        <n-input v-model:value="form.userID" @input="form.userID= form.userID.trim()" type="text" class="mt-3 font-bold text-black" />
+                    </div>
                     <div>
                         <label for="employee-id" class="pt-2 text-[16px]">Employee ID / <span class="battambang-regular text-[16px]">លេខសម្គាល់បុគ្គលិក</span></label>
-                        <n-input v-model:value="form.employeeid" @input="form.employeeid= form.employeeid.trim()" type="text" class="mt-3 font-bold text-black" />
+                        <n-input v-model:value="form.employeeid" @input="form.employeeid= form.employeeid.trim()" type="text" class="mt-3 font-bold text-black" /> 
                     </div>
 
                     <!-- Employee Name -->
@@ -164,7 +168,8 @@ const form = ref({
     annualleave:"",
     albalance:"",
     sickleave:"",
-    slbalance:""
+    slbalance:"",
+    userID:""
 
 });
 

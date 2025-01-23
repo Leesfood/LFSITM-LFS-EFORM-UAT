@@ -62,6 +62,7 @@
               class="text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-gray-200">
               <td class="px-2 py-2 flex items-center text-left border-r border-gray-200">{{ (currentPage - 1) * pageSize
                 + index + 1 }}</td>
+              <!-- <td class="px-2 py-2 flex items-center text-left border-r border-gray-200">{{employee.userID}}</td> -->
               <td class="px-2 py-2 border-r text-left border-gray-200  hidden md:table-cell">{{
                 employee.employeeid }}</td>
               <td class="pl-2 py-2 border-r border-gray-200  whitespace-nowrap px-2">{{ employee.employeename }}</td>
